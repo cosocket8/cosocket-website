@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COSOCKET — Industrial Machine Rentals, Pune</title>
+<meta name="description" content="Rent CNC, Lathe, Hydraulic Press & more in Pune. 48-hour delivery to your factory. Zero maintenance. MSME-friendly rates.">
+
+<!-- ✅ Supabase SDK (loads from CDN, no install needed) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@500;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ===================== RESET & TOKENS ===================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --black:   #0a0a08;
+  --iron:    #141412;
+  --steel:   #1e1e1b;
+  --rust:    #C94A1F;
+  --rust-dk: #A33515;
+  --rust-lt: #E8623A;
+  --yellow:  #F5C400;
+  --smoke:   #2e2e2a;
+  --ash:     #5a5a54;
+  --mist:    #9a9a8e;
+  --cream:   #f0ede4;
+  --white:   #ffffff;
+  --ff-display: 'Bebas Neue', sans-serif;
+  --ff-cond:    'Barlow Condensed', sans-serif;
+  --ff-body:    'Barlow', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--ff-body); background: var(--black); color: var(--cream); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: var(--ff-body); }
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
+}
+
+/* ===================== NAV ===================== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(10,10,8,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--smoke);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 68px;
+}
+.logo { font-family: var(--ff-display); font-size: 28px; letter-spacing: 2px; color: var(--white); }
+.logo span { color: var(--rust); }
+.logo em {
+  font-style: normal; font-family: var(--ff-body);
+  font-size: 10px; font-weight: 600; letter-spacing: 3px; color: var(--mist);
+  display: block; margin-top: -4px; text-transform: uppercase;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-family: var(--ff-cond); font-size: 15px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--mist); transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--rust); color: var(--white); border: none; padding: 12px 28px;
+  font-family: var(--ff-cond); font-size: 14px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--rust-lt); }
+
+/* ===================== HERO ===================== */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 40px 60px; position: relative; overflow: hidden; background: var(--iron);
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: repeating-linear-gradient(-55deg, transparent, transparent 40px,
+    rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px);
+}
+.hero-inner {
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center;
+  position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--smoke); border: 1px solid var(--rust);
+  padding: 6px 14px; font-family: var(--ff-cond); font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--rust); margin-bottom: 28px;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--rust); animation: blink 1.5s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.hero h1 {
+  font-family: var(--ff-display); font-size: clamp(72px, 9vw, 130px);
+  line-height: 0.9; letter-spacing: 2px; color: var(--white); margin-bottom: 32px;
+}
+.hero h1 .accent { color: var(--rust); display: block; }
+.hero h1 .outline { -webkit-text-stroke: 2px var(--cream); color: transparent; }
+.hero-sub { font-size: 17px; line-height: 1.7; color: var(--mist); max-width: 500px; margin-bottom: 40px; }
+.hero-sub strong { color: var(--cream); }
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
+.btn-primary {
+  background: var(--rust); color: var(--white); border: none; padding: 16px 36px;
+  font-family: var(--ff-cond); font-size: 16px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--rust-lt); transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent; color: var(--cream);
+  border: 1.5px solid var(--ash); padding: 16px 36px;
+  font-family: var(--ff-cond); font-size: 16px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--cream); color: var(--white); }
+.hero-stats { display: flex; gap: 48px; border-top: 1px solid var(--smoke); padding-top: 32px; }
+.stat-num { font-family: var(--ff-display); font-size: 48px; color: var(--white); line-height: 1; }
+.stat-num span { color: var(--rust); }
+.stat-label { font-family: var(--ff-cond); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--mist); margin-top: 4px; }
+.hero-panel {
+  background: var(--steel); border: 1px solid var(--smoke); border-top: 3px solid var(--rust); padding: 32px;
+}
+.panel-label { font-family: var(--ff-cond); font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--rust); margin-bottom: 24px; }
+.featured-machine h3 { font-family: var(--ff-cond); font-size: 26px; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+.featured-machine p { font-size: 13px; color: var(--mist); line-height: 1.6; margin-bottom: 20px; }
+.price-tag { display: flex; align-items: baseline; gap: 6px; margin-bottom: 20px; }
+.price-tag .amount { font-family: var(--ff-display); font-size: 44px; color: var(--yellow); }
+.price-tag .unit { font-size: 14px; color: var(--mist); }
+.avail { display: flex; align-items: center; gap: 8px; margin-bottom: 28px; }
+.avail-dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; flex-shrink: 0; }
+.avail span { font-family: var(--ff-cond); font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #4caf50; }
+.panel-divider { border: none; border-top: 1px solid var(--smoke); margin: 20px 0; }
+.mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.mini-stat { background: var(--smoke); padding: 14px; text-align: center; }
+.mini-val { font-family: var(--ff-display); font-size: 28px; color: var(--white); }
+.mini-lbl { font-size: 11px; color: var(--mist); letter-spacing: 1px; text-transform: uppercase; }
+
+/* TICKER */
+.ticker-wrap { background: var(--rust); overflow: hidden; padding: 10px 0; border-top: 1px solid var(--rust-dk); }
+.ticker { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
+.ticker-item { font-family: var(--ff-cond); font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white); padding: 0 40px; }
+.ticker-sep { color: rgba(255,255,255,0.4); }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* SECTIONS */
+.section { padding: 100px 40px; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-eyebrow {
+  font-family: var(--ff-cond); font-size: 12px; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--rust);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 12px;
+}
+.section-eyebrow::after { content: ''; flex: 0 0 40px; height: 2px; background: var(--rust); }
+.section-title { font-family: var(--ff-display); font-size: clamp(42px,5vw,72px); line-height: 0.95; letter-spacing: 1px; color: var(--white); margin-bottom: 20px; }
+.section-sub { font-size: 16px; color: var(--mist); line-height: 1.7; max-width: 540px; }
+
+/* WHY */
+.why-section { background: var(--iron); }
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 56px; }
+.why-card { background: var(--steel); padding: 40px 32px; position: relative; overflow: hidden; transition: background 0.3s; }
+.why-card:hover { background: var(--smoke); }
+.why-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--rust); transform:scaleX(0); transform-origin:left; transition:transform 0.3s; }
+.why-card:hover::before { transform:scaleX(1); }
+.why-num { font-family:var(--ff-display); font-size:80px; color:var(--smoke); position:absolute; top:12px; right:20px; line-height:1; transition:color 0.3s; }
+.why-card:hover .why-num { color:var(--rust); opacity:0.3; }
+.why-icon { font-size:36px; margin-bottom:20px; }
+.why-card h4 { font-family:var(--ff-cond); font-size:22px; font-weight:800; color:var(--white); margin-bottom:12px; }
+.why-card p { font-size:14px; color:var(--mist); line-height:1.7; }
+.cost-table { margin-top:60px; display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--smoke); }
+.compare-col { padding:40px; }
+.compare-col:first-child { border-right:1px solid var(--smoke); }
+.compare-head { display:flex; align-items:center; gap:12px; font-family:var(--ff-cond); font-size:20px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:28px; padding-bottom:20px; border-bottom:1px solid var(--smoke); }
+.compare-head.bad { color:#e24b4a; } .compare-head.good { color:#66bb44; }
+.compare-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.04); font-size:14px; color:var(--mist); }
+.compare-row:last-of-type { border:none; }
+.compare-row .val { font-weight:600; color:var(--cream); }
+.compare-total-row { margin-top:20px; padding:20px; display:flex; justify-content:space-between; align-items:center; }
+.compare-col:first-child .compare-total-row { background:rgba(226,75,74,0.12); }
+.compare-col:last-child .compare-total-row { background:rgba(102,187,68,0.12); }
+.total-label { font-family:var(--ff-cond); font-size:14px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--mist); }
+.total-val { font-family:var(--ff-display); font-size:36px; }
+.compare-col:first-child .total-val { color:#e24b4a; }
+.compare-col:last-child .total-val { color:#66bb44; }
+
+/* MACHINES */
+.machines-section { background:var(--black); }
+.machine-tabs { display:flex; gap:0; margin-top:48px; margin-bottom:2px; flex-wrap:wrap; }
+.tab { background:var(--steel); border:1px solid var(--smoke); color:var(--mist); padding:12px 24px; font-family:var(--ff-cond); font-size:14px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; transition:all 0.2s; border-right:none; }
+.tab:last-child { border-right:1px solid var(--smoke); }
+.tab.active { background:var(--rust); border-color:var(--rust); color:var(--white); }
+.tab:hover:not(.active) { color:var(--white); background:var(--smoke); }
+.machines-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+.mcard { background:var(--steel); border-top:2px solid transparent; transition:border-color 0.25s, background 0.25s; position:relative; overflow:hidden; }
+.mcard:hover { border-top-color:var(--rust); background:var(--smoke); }
+.mcard-header { height:120px; display:flex; align-items:center; justify-content:center; background:var(--smoke); font-size:56px; position:relative; }
+.mcard-cat-strip { position:absolute; bottom:0; left:0; right:0; background:var(--rust); font-family:var(--ff-cond); font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--white); padding:3px 12px; text-align:center; }
+.mcard-body { padding:24px; }
+.mcard-body h4 { font-family:var(--ff-cond); font-size:20px; font-weight:800; color:var(--white); margin-bottom:8px; }
+.mcard-body p { font-size:13px; color:var(--mist); line-height:1.6; margin-bottom:20px; }
+.mcard-footer { display:flex; align-items:center; justify-content:space-between; }
+.mcard-price { font-family:var(--ff-display); font-size:28px; color:var(--yellow); }
+.mcard-price small { font-family:var(--ff-body); font-size:12px; font-weight:400; color:var(--mist); }
+.book-btn { background:transparent; color:var(--rust); border:1.5px solid var(--rust); padding:8px 20px; font-family:var(--ff-cond); font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; transition:all 0.2s; }
+.book-btn:hover { background:var(--rust); color:var(--white); }
+
+/* HOW */
+.how-section { background:var(--iron); }
+.steps-row { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:60px; }
+.step-card { background:var(--steel); padding:40px 28px; position:relative; }
+.step-card::after { content:'→'; position:absolute; right:-16px; top:50%; transform:translateY(-50%); font-size:22px; color:var(--rust); z-index:1; }
+.step-card:last-child::after { display:none; }
+.step-number { font-family:var(--ff-display); font-size:72px; color:var(--smoke); line-height:1; margin-bottom:16px; }
+.step-card h4 { font-family:var(--ff-cond); font-size:20px; font-weight:800; color:var(--white); margin-bottom:10px; }
+.step-card p { font-size:13px; color:var(--mist); line-height:1.6; }
+.step-highlight { color:var(--rust); font-weight:600; }
+
+/* BOOKING */
+.booking-section { background:var(--black); }
+.booking-grid { display:grid; grid-template-columns:1fr 400px; gap:60px; align-items:start; margin-top:60px; }
+.form-group { margin-bottom:20px; }
+.form-group label { display:block; font-family:var(--ff-cond); font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--ash); margin-bottom:8px; }
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; background:var(--steel); border:1px solid var(--smoke); border-bottom:2px solid var(--ash);
+  padding:14px 16px; color:var(--cream); font-family:var(--ff-body); font-size:15px; outline:none; transition:border-color 0.2s; appearance:none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-bottom-color:var(--rust); }
+.form-group select { cursor:pointer; }
+.form-group select option { background:var(--steel); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.submit-btn {
+  width:100%; background:var(--rust); color:var(--white); border:none; padding:18px;
+  font-family:var(--ff-cond); font-size:18px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  clip-path:polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition:background 0.2s; margin-top:8px;
+}
+.submit-btn:hover:not(:disabled) { background:var(--rust-lt); }
+.submit-btn:disabled { opacity:0.6; cursor:not-allowed; }
+.wa-btn {
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  width:100%; background:#25D366; color:var(--white); border:none; padding:16px;
+  font-family:var(--ff-cond); font-size:16px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  margin-top:12px; transition:opacity 0.2s;
+}
+.wa-btn:hover { opacity:0.88; }
+.info-panel { background:var(--steel); border-top:3px solid var(--rust); }
+.info-head { padding:24px 28px; font-family:var(--ff-cond); font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--rust); border-bottom:1px solid var(--smoke); }
+.info-item { display:flex; gap:16px; padding:20px 28px; border-bottom:1px solid var(--smoke); align-items:flex-start; }
+.info-item:last-of-type { border-bottom:none; }
+.info-icon { width:40px; height:40px; background:var(--smoke); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.info-text h5 { font-family:var(--ff-cond); font-size:16px; font-weight:800; color:var(--white); margin-bottom:4px; }
+.info-text p { font-size:13px; color:var(--mist); line-height:1.5; }
+.contact-strip { background:var(--rust); padding:24px 28px; }
+.contact-strip .c-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:6px; }
+.contact-strip .c-phone { font-family:var(--ff-display); font-size:32px; color:var(--white); }
+.contact-strip .c-detail { font-size:13px; color:rgba(255,255,255,0.7); margin-top:4px; }
+
+/* TESTIMONIALS */
+.testi-section { background:var(--iron); }
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+.tcard { background:var(--steel); padding:36px; position:relative; overflow:hidden; }
+.tcard::before { content:'"'; font-family:var(--ff-display); font-size:120px; color:var(--smoke); position:absolute; top:-10px; right:16px; line-height:1; }
+.tcard-stars { color:var(--yellow); font-size:14px; margin-bottom:16px; letter-spacing:2px; }
+.tcard p { font-size:15px; color:var(--cream); line-height:1.8; margin-bottom:24px; font-style:italic; position:relative; z-index:1; }
+.tcard-author { display:flex; align-items:center; gap:14px; }
+.author-avatar { width:44px; height:44px; background:var(--rust); color:var(--white); display:flex; align-items:center; justify-content:center; font-family:var(--ff-cond); font-size:16px; font-weight:800; flex-shrink:0; }
+.author-name { font-family:var(--ff-cond); font-size:16px; font-weight:700; color:var(--white); }
+.author-biz { font-size:12px; color:var(--mist); margin-top:2px; }
+
+/* FAQ */
+.faq-section { background:var(--black); }
+.faq-list { margin-top:56px; max-width:760px; }
+.faq-item { border-bottom:1px solid var(--smoke); cursor:pointer; }
+.faq-q { display:flex; justify-content:space-between; align-items:center; padding:22px 0; font-family:var(--ff-cond); font-size:19px; font-weight:700; color:var(--cream); transition:color 0.2s; }
+.faq-item:hover .faq-q { color:var(--white); }
+.faq-icon { font-style:normal; font-size:22px; color:var(--rust); transition:transform 0.3s; flex-shrink:0; margin-left:16px; }
+.faq-a { font-size:14px; color:var(--mist); line-height:1.8; max-height:0; overflow:hidden; transition:max-height 0.35s ease, padding 0.35s; }
+.faq-item.open .faq-a { max-height:200px; padding-bottom:20px; }
+.faq-item.open .faq-icon { transform:rotate(45deg); }
+
+/* FOOTER */
+footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px 40px 32px; }
+.footer-inner { max-width:1200px; margin:0 auto; }
+.footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; margin-bottom:48px; }
+.footer-logo { font-family:var(--ff-display); font-size:32px; letter-spacing:2px; color:var(--white); margin-bottom:12px; }
+.footer-logo span { color:var(--rust); }
+.footer-desc { font-size:13px; color:var(--mist); line-height:1.8; max-width:280px; }
+.footer-col h5 { font-family:var(--ff-cond); font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--white); margin-bottom:20px; }
+.footer-col ul { list-style:none; }
+.footer-col li { font-size:13px; color:var(--mist); margin-bottom:10px; cursor:pointer; transition:color 0.2s; }
+.footer-col li:hover { color:var(--white); }
+.footer-bottom { border-top:1px solid var(--smoke); padding-top:24px; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--ash); }
+
+/* MODAL */
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:500; align-items:center; justify-content:center; }
+.modal-overlay.show { display:flex; }
+.modal { background:var(--steel); border-top:4px solid var(--rust); padding:48px 40px; max-width:440px; width:90%; position:relative; text-align:center; }
+.modal-close { position:absolute; top:16px; right:20px; background:none; border:none; font-size:24px; cursor:pointer; color:var(--mist); }
+.success-icon { font-size:52px; margin-bottom:20px; }
+.modal h3 { font-family:var(--ff-display); font-size:36px; color:var(--white); margin-bottom:12px; }
+.modal p { font-size:14px; color:var(--mist); line-height:1.8; }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--steel); border-left: 4px solid var(--rust);
+  color: var(--cream); padding: 16px 28px; font-size: 14px;
+  z-index: 600; transition: transform 0.4s ease; white-space: nowrap;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.success { border-left-color: #66bb44; }
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-panel{display:none}
+  .booking-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-inner{padding:0 20px}
+  .section{padding:72px 20px}
+  .hero{padding:90px 20px 60px}
+  .hero h1{font-size:64px}
+  .hero-stats{gap:28px;flex-wrap:wrap}
+  .why-grid,.machines-grid,.testi-grid,.steps-row{grid-template-columns:1fr}
+  .cost-table{grid-template-columns:1fr}
+  .compare-col:first-child{border-right:none;border-bottom:1px solid var(--smoke)}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .machine-tabs{flex-wrap:wrap}
+  .tab{border-right:1px solid var(--smoke) !important;margin-bottom:2px}
+  .step-card::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">CO<span>SOCKET</span><em>MSME Machine Rentals</em></div>
+    <ul class="nav-links">
+      <li><a href="#machines">Machines</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta" onclick="goTo('contact')">Book a Machine</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Live in Pune · 20+ Machines Ready</div>
+      <h1>RENT.<span class="accent">PRODUCE.</span><span class="outline">SAVE.</span></h1>
+      <p class="hero-sub">Why lock <strong>₹15–25 lakhs</strong> in equipment that sits idle? Rent top-grade industrial machines by the day, week, or month — <strong>delivered to your factory in 48 hours.</strong></p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="goTo('contact')">Book a Machine Now</button>
+        <button class="btn-ghost" onclick="goTo('machines')">See All Machines</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">20<span>+</span></div><div class="stat-label">Machines Available</div></div>
+        <div><div class="stat-num">48<span>hr</span></div><div class="stat-label">Delivery to Site</div></div>
+        <div><div class="stat-num">₹0</div><div class="stat-label">Maintenance Cost</div></div>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="panel-label">★ Most Rented This Week</div>
+      <div class="featured-machine">
+        <h3>CNC Milling Machine</h3>
+        <p>3-axis precision milling for metal parts, moulds & components. Fully calibrated before delivery.</p>
+        <div class="price-tag"><span class="amount">₹2,800</span><span class="unit">/ day</span></div>
+        <div class="avail"><div class="avail-dot"></div><span>Available Now</span></div>
+        <button class="btn-primary" style="width:100%" onclick="goTo('contact')">Reserve This Machine</button>
+      </div>
+      <hr class="panel-divider">
+      <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-val">₹4.2L</div><div class="mini-lbl">You Save vs Owning</div></div>
+        <div class="mini-stat"><div class="mini-val">14</div><div class="mini-lbl">Booked This Week</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap"><div class="ticker">
+  <span class="ticker-item">CNC Milling Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Hydraulic Press 50T <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Lathe Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">MIG Welding Robot <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Power Press 25T <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Band Saw Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Free Delivery in Pune <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">CNC Milling Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Hydraulic Press 50T <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Lathe Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">MIG Welding Robot <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Power Press 25T <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Band Saw Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Free Delivery in Pune <span class="ticker-sep">—</span></span>
+</div></div>
+
+<!-- WHY RENT -->
+<section class="section why-section" id="pricing">
+  <div class="section-inner">
+    <div class="section-eyebrow">Why Renting Wins</div>
+    <h2 class="section-title">THE SMARTER<br>WAY TO PRODUCE</h2>
+    <p class="section-sub">Ownership looks good on paper. Renting wins in real life — especially when orders are seasonal and capital is tight.</p>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-num">01</div><div class="why-icon">💰</div><h4>Zero Capital Lock-In</h4><p>Save ₹15–25 lakhs in purchase cost. Use that capital for raw materials, labour, and growth.</p></div>
+      <div class="why-card"><div class="why-num">02</div><div class="why-icon">🔧</div><h4>We Handle Maintenance</h4><p>Every machine comes fully serviced. Breakdowns are our problem. Replaced within 24 hours guaranteed.</p></div>
+      <div class="why-card"><div class="why-num">03</div><div class="why-icon">📈</div><h4>Scale With Your Orders</h4><p>Bulk order? Rent 3 machines. Slow month? Pay nothing. Your costs move with your business.</p></div>
+    </div>
+    <div class="cost-table">
+      <div class="compare-col">
+        <div class="compare-head bad">✗ Cost of Owning</div>
+        <div class="compare-row"><span>Purchase EMI</span><span class="val">₹18,000 / mo</span></div>
+        <div class="compare-row"><span>Annual Maintenance</span><span class="val">₹45,000</span></div>
+        <div class="compare-row"><span>Operator Salary</span><span class="val">₹15,000 / mo</span></div>
+        <div class="compare-row"><span>Idle (off-season)</span><span class="val">Full EMI runs</span></div>
+        <div class="compare-row"><span>Depreciation</span><span class="val">₹60,000 / yr</span></div>
+        <div class="compare-total-row"><span class="total-label">Total / Year</span><span class="total-val">₹3.6L+</span></div>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head good">✓ Cost of Renting</div>
+        <div class="compare-row"><span>Pay per day used</span><span class="val">₹2,800 / day</span></div>
+        <div class="compare-row"><span>Maintenance</span><span class="val">₹0 (included)</span></div>
+        <div class="compare-row"><span>Optional Operator</span><span class="val">₹800 / day</span></div>
+        <div class="compare-row"><span>Off-season</span><span class="val">Pay nothing</span></div>
+        <div class="compare-row"><span>Depreciation</span><span class="val">₹0 (not your asset)</span></div>
+        <div class="compare-total-row"><span class="total-label">Avg / Year</span><span class="total-val">₹1.4L</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MACHINES -->
+<section class="section machines-section" id="machines">
+  <div class="section-inner">
+    <div class="section-eyebrow">Our Fleet</div>
+    <h2 class="section-title">AVAILABLE<br>MACHINES</h2>
+    <p class="section-sub">All machines fully serviced. Delivered within Pune & MIDC in 48 hours.</p>
+    <div class="machine-tabs">
+      <button class="tab active" onclick="filterMachines('all',this)">All Machines</button>
+      <button class="tab" onclick="filterMachines('metal',this)">Metal Fabrication</button>
+      <button class="tab" onclick="filterMachines('wood',this)">Woodworking</button>
+      <button class="tab" onclick="filterMachines('press',this)">Pressing & Forming</button>
+    </div>
+    <div class="machines-grid" id="machineGrid"></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section" id="how">
+  <div class="section-inner">
+    <div class="section-eyebrow">Simple Process</div>
+    <h2 class="section-title">BOOKED IN<br>4 STEPS</h2>
+    <div class="steps-row">
+      <div class="step-card"><div class="step-number">01</div><h4>Choose Machine</h4><p>Browse our fleet and pick the machine for your job.</p></div>
+      <div class="step-card"><div class="step-number">02</div><h4>Pick Your Dates</h4><p>Tell us when and for how long. We confirm in <span class="step-highlight">2 hours on WhatsApp.</span></p></div>
+      <div class="step-card"><div class="step-number">03</div><h4>We Deliver</h4><p>Machine at your factory in <span class="step-highlight">48 hours</span>, fully calibrated.</p></div>
+      <div class="step-card"><div class="step-number">04</div><h4>Produce & Return</h4><p>Use it, finish the job. We collect when you're done. No hassle.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="section booking-section" id="contact">
+  <div class="section-inner">
+    <div class="section-eyebrow">Reserve Now</div>
+    <h2 class="section-title">BOOK YOUR<br>MACHINE</h2>
+    <p class="section-sub">Fill the form and we'll confirm availability within 2 hours on WhatsApp.</p>
+    <div class="booking-grid">
+      <div>
+        <div class="form-group">
+          <label>Machine Needed</label>
+          <select id="bk-machine">
+            <option value="">Select a machine</option>
+            <option>CNC Milling Machine</option>
+            <option>Hydraulic Press (50 Ton)</option>
+            <option>Lathe Machine (Heavy Duty)</option>
+            <option>MIG Welding Robot</option>
+            <option>Power Press (25 Ton)</option>
+            <option>Band Saw Machine</option>
+            <option>Radial Drilling Machine</option>
+            <option>Roll Forming Machine</option>
+            <option>Other (mention in notes)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Start Date</label><input type="date" id="bk-start"></div>
+          <div class="form-group">
+            <label>Duration</label>
+            <select id="bk-duration">
+              <option>1–3 days</option><option>1 week</option>
+              <option>2 weeks</option><option>1 month</option><option>3+ months</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Factory / Site Address</label><input type="text" id="bk-addr" placeholder="Your factory address in Pune"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Your Name</label><input type="text" id="bk-name" placeholder="Full name"></div>
+          <div class="form-group"><label>WhatsApp Number</label><input type="tel" id="bk-phone" placeholder="10-digit mobile"></div>
+        </div>
+        <div class="form-group"><label>Notes (optional)</label><textarea rows="3" id="bk-notes" placeholder="Operator needed? Special requirements?" style="resize:vertical"></textarea></div>
+        <button class="submit-btn" id="submitBtn" onclick="submitBooking()">Submit Booking Request</button>
+        <button class="wa-btn" onclick="openWhatsApp()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp Instead
+        </button>
+      </div>
+      <div class="info-panel">
+        <div class="info-head">Why Book With Us</div>
+        <div class="info-item"><div class="info-icon">🚚</div><div class="info-text"><h5>Free Delivery in Pune</h5><p>We deliver and collect from your factory at no extra charge.</p></div></div>
+        <div class="info-item"><div class="info-icon">⚡</div><div class="info-text"><h5>2-Hour Confirmation</h5><p>Availability and pricing confirmed within 2 hours on WhatsApp.</p></div></div>
+        <div class="info-item"><div class="info-icon">🔧</div><div class="info-text"><h5>Operator Available</h5><p>Trained operator at ₹800/day extra. Mention it when booking.</p></div></div>
+        <div class="info-item"><div class="info-icon">📝</div><div class="info-text"><h5>Simple Agreement</h5><p>One-page rental agreement. 30% advance online. Balance after delivery.</p></div></div>
+        <div class="contact-strip">
+          <div class="c-label">Call or WhatsApp</div>
+          <div class="c-phone">+91 98765 43210</div>
+          <div class="c-detail">cosocket@gmail.com</div>
+          <div class="c-detail" style="margin-top:8px">Mon – Sat · 8am to 8pm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">What Clients Say</div>
+    <h2 class="section-title">TRUSTED BY<br>FACTORY OWNERS</h2>
+    <div class="testi-grid">
+      <div class="tcard"><div class="tcard-stars">★★★★★</div><p>"Had a bulk export order for 3 months. Rented 2 CNC machines instead of buying. Saved over ₹8 lakhs in capital. Will do this every peak season."</p><div class="tcard-author"><div class="author-avatar">RS</div><div><div class="author-name">Rakesh Sawant</div><div class="author-biz">Metal parts unit, Bhosari MIDC</div></div></div></div>
+      <div class="tcard"><div class="tcard-stars">★★★★★</div><p>"My lathe broke during a critical order. COSOCKET delivered a replacement in 36 hours. Saved my order and my reputation with the buyer."</p><div class="tcard-author"><div class="author-avatar">PM</div><div><div class="author-name">Priya Mane</div><div class="author-biz">Precision engineering, Hadapsar</div></div></div></div>
+      <div class="tcard"><div class="tcard-stars">★★★★★</div><p>"Started a new production line but didn't want to commit ₹20L on equipment. Rented for 6 months to test. Now I know exactly which machines to buy."</p><div class="tcard-author"><div class="author-avatar">VK</div><div><div class="author-name">Vijay Kulkarni</div><div class="author-biz">Startup manufacturer, Chakan</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Common Questions</div>
+    <h2 class="section-title">FAQ</h2>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">CO<span>SOCKET</span></div>
+        <p class="footer-desc">Pune's trusted MSME machine rental service. Helping small factories produce more without buying heavy equipment.</p>
+      </div>
+      <div class="footer-col"><h5>Machines</h5><ul>
+        <li onclick="goTo('machines')">CNC Machines</li><li onclick="goTo('machines')">Hydraulic Press</li>
+        <li onclick="goTo('machines')">Lathe Machines</li><li onclick="goTo('machines')">Welding Robots</li>
+        <li onclick="goTo('machines')">Power Press</li>
+      </ul></div>
+      <div class="footer-col"><h5>Company</h5><ul>
+        <li onclick="goTo('pricing')">Why Rent</li><li onclick="goTo('how')">How It Works</li>
+        <li onclick="goTo('contact')">Book a Machine</li><li onclick="openWhatsApp()">WhatsApp Us</li>
+      </ul></div>
+      <div class="footer-col"><h5>Areas Served</h5><ul>
+        <li>Bhosari MIDC</li><li>Chakan</li><li>Hadapsar</li><li>Pimpri-Chinchwad</li><li>Ranjangaon</li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 COSOCKET. All rights reserved.</span>
+      <span>Made for MSME India 🇮🇳</span>
+    </div>
+  </div>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="success-icon">✅</div>
+    <h3>Request Sent!</h3>
+    <p>We'll confirm on your WhatsApp within 2 hours.<br>Thank you for choosing COSOCKET.</p>
+    <button class="btn-primary" style="margin-top:28px;width:100%" onclick="closeModal()">Done</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   STEP 1 — After creating your Supabase project, paste your
+   Project URL and anon key below (from Supabase → Settings → API)
+   ============================================================ */
+const SUPABASE_URL  = 'https://lzvstkrsessglefqckpm.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6dnN0a3JzZXNzZ2xlZnFja3BtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0MDczMDYsImV4cCI6MjA5Mzk4MzMwNn0.i2VLJ45JyWcVdV_pC6leBBQmrTEaWc-H6MVRQYJsxS0';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+/* ---- Machine data ---- */
+const machines = [
+  {cat:'metal',icon:'⚙️',name:'CNC Milling Machine',desc:'3-axis precision milling for metal parts, moulds & components.',price:'₹2,800',unit:'/day'},
+  {cat:'metal',icon:'🔩',name:'Lathe Machine (Heavy Duty)',desc:'Heavy duty lathe for turning, facing and threading operations.',price:'₹1,800',unit:'/day'},
+  {cat:'press',icon:'🏗️',name:'Hydraulic Press (50 Ton)',desc:'50-ton capacity for sheet metal forming, bending and stamping.',price:'₹3,200',unit:'/day'},
+  {cat:'press',icon:'💪',name:'Power Press (25 Ton)',desc:'Ideal for punching, blanking and progressive die operations.',price:'₹2,200',unit:'/day'},
+  {cat:'metal',icon:'🤖',name:'MIG Welding Robot',desc:'Semi-automated welding for consistent bead quality on steel frames.',price:'₹3,800',unit:'/day'},
+  {cat:'wood', icon:'🪚',name:'Band Saw Machine',desc:'Industrial band saw for wood cutting, curved cuts and resawing.',price:'₹900',unit:'/day'},
+  {cat:'metal',icon:'🔨',name:'Radial Drilling Machine',desc:'For drilling, reaming and tapping holes in metal fabrication work.',price:'₹1,200',unit:'/day'},
+  {cat:'press',icon:'📦',name:'Roll Forming Machine',desc:'Continuous forming of metal strips into profiles and sections.',price:'₹4,500',unit:'/day'},
+  {cat:'wood', icon:'🪵',name:'Planer Thicknesser',desc:'Precision wood planning and thickness reduction in one pass.',price:'₹1,100',unit:'/day'},
+];
+const catLabel = {metal:'Metal Fabrication',press:'Pressing & Forming',wood:'Woodworking'};
+
+function renderMachines(filter){
+  const list = filter==='all'?machines:machines.filter(m=>m.cat===filter);
+  document.getElementById('machineGrid').innerHTML = list.map(m=>`
+    <div class="mcard">
+      <div class="mcard-header">${m.icon}<div class="mcard-cat-strip">${catLabel[m.cat]}</div></div>
+      <div class="mcard-body">
+        <h4>${m.name}</h4><p>${m.desc}</p>
+        <div class="mcard-footer">
+          <div class="mcard-price">${m.price} <small>${m.unit}</small></div>
+          <button class="book-btn" onclick="bookMachine('${m.name}')">Book Now</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function filterMachines(cat,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderMachines(cat);
+}
+function bookMachine(name){
+  goTo('contact');
+  setTimeout(()=>{
+    const sel=document.getElementById('bk-machine');
+    for(let o of sel.options){if(o.text===name){sel.value=o.value;break;}}
+  },700);
+}
+
+/* ---- FAQ ---- */
+const faqs=[
+  {q:'What areas do you deliver to?',a:'All of Pune district — Bhosari MIDC, Chakan, Hadapsar, Pimpri-Chinchwad, Ranjangaon. Free delivery within 30km of central Pune.'},
+  {q:'How much advance payment is required?',a:'30% at booking confirmation. Remaining 70% after machine delivery and setup at your site.'},
+  {q:'What if the machine breaks down?',a:'Any breakdown due to normal use: we repair or replace within 24 hours at zero extra cost. Downtime is our responsibility.'},
+  {q:'Can I extend the rental?',a:'Yes, with 24 hours notice and subject to availability. Weekly and monthly rates are cheaper per day.'},
+  {q:'Do you provide a trained operator?',a:'Yes — ₹800/day extra. Just mention it when booking. Available for most machines.'},
+  {q:'Is there a minimum rental period?',a:'1 day minimum for most machines. CNC and welding robots: 3 days minimum due to setup time.'},
+];
+document.getElementById('faqList').innerHTML = faqs.map((f,i)=>`
+  <div class="faq-item" onclick="toggleFaq(${i})" id="faq-${i}">
+    <div class="faq-q">${f.q}<em class="faq-icon">+</em></div>
+    <div class="faq-a">${f.a}</div>
+  </div>`).join('');
+function toggleFaq(i){
+  document.querySelectorAll('.faq-item').forEach((el,idx)=>{if(idx!==i)el.classList.remove('open');});
+  document.getElementById('faq-'+i).classList.toggle('open');
+}
+
+/* ---- Booking → Supabase ---- */
+async function submitBooking(){
+  const machine  = document.getElementById('bk-machine').value;
+  const name     = document.getElementById('bk-name').value.trim();
+  const phone    = document.getElementById('bk-phone').value.trim();
+  const addr     = document.getElementById('bk-addr').value.trim();
+  const start    = document.getElementById('bk-start').value;
+  const duration = document.getElementById('bk-duration').value;
+  const notes    = document.getElementById('bk-notes').value.trim();
+
+  if(!machine){ showToast('Please select a machine.','error'); return; }
+  if(!name)   { showToast('Please enter your name.','error'); return; }
+  if(!phone || phone.length < 10){ showToast('Please enter a valid 10-digit WhatsApp number.','error'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  const { error } = await supabase.from('bookings').insert([{
+    machine_name : machine,
+    customer_name: name,
+    whatsapp     : phone,
+    address      : addr,
+    start_date   : start || null,
+    duration     : duration,
+    notes        : notes,
+    status       : 'new'
+  }]);
+
+  btn.textContent = 'Submit Booking Request';
+  btn.disabled = false;
+
+  if(error){
+    console.error(error);
+    showToast('Something went wrong. Please WhatsApp us directly.','error');
+    return;
+  }
+
+  document.getElementById('successModal').classList.add('show');
+  // clear form
+  ['bk-machine','bk-name','bk-phone','bk-addr','bk-start','bk-notes'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+}
+
+/* ---- Helpers ---- */
+function showToast(msg, type='success'){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type==='error'?' error':'');
+  setTimeout(()=>t.classList.remove('show'), 3500);
+}
+function closeModal(){ document.getElementById('successModal').classList.remove('show'); }
+function openWhatsApp(){ window.open('https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20rent%20a%20machine%20from%20COSOCKET','_blank'); }
+function goTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+renderMachines('all');
+</script>
+</body>
+</html>
