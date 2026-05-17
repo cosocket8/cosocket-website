@@ -325,12 +325,139 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
 .toast.show { transform: translateX(-50%) translateY(0); }
 .toast.success { border-left-color: #66bb44; }
 
+/* ===================== DESIGNS ===================== */
+.designs-section { background: var(--black); }
+.design-tabs { display:flex; gap:0; margin-top:48px; margin-bottom:2px; flex-wrap:wrap; }
+.design-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+.dcard {
+  background: var(--steel); border-top:2px solid transparent;
+  transition: border-color 0.25s, background 0.25s; position:relative; overflow:hidden; cursor:pointer;
+}
+.dcard:hover { border-top-color: var(--yellow); background: var(--smoke); }
+.dcard-preview {
+  height:180px; background: var(--smoke); display:flex; align-items:center; justify-content:center;
+  font-size:68px; position:relative; overflow:hidden;
+}
+.dcard-preview::after {
+  content:''; position:absolute; inset:0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(255,255,255,0.02) 6px, rgba(255,255,255,0.02) 7px);
+}
+.dcard-format {
+  position:absolute; top:12px; right:12px; background:var(--yellow); color:var(--black);
+  font-family:var(--ff-cond); font-size:10px; font-weight:800; letter-spacing:2px;
+  text-transform:uppercase; padding:3px 10px;
+}
+.dcard-complexity {
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(transparent, rgba(0,0,0,0.7));
+  display:flex; gap:4px; padding:10px 14px; align-items:center;
+}
+.complexity-dot { width:8px; height:8px; border-radius:50%; background:var(--ash); }
+.complexity-dot.filled { background:var(--yellow); }
+.dcard-body { padding:20px 24px; }
+.dcard-body h4 { font-family:var(--ff-cond); font-size:19px; font-weight:800; color:var(--white); margin-bottom:6px; }
+.dcard-body p { font-size:13px; color:var(--mist); line-height:1.6; margin-bottom:16px; }
+.dcard-meta { display:flex; align-items:center; justify-content:space-between; }
+.dcard-tags { display:flex; gap:6px; flex-wrap:wrap; }
+.dtag {
+  background:var(--smoke); color:var(--mist); font-family:var(--ff-cond); font-size:10px;
+  font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:3px 8px;
+}
+.dcard-action {
+  background:transparent; color:var(--yellow); border:1.5px solid var(--yellow);
+  padding:7px 18px; font-family:var(--ff-cond); font-size:12px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase; transition:all 0.2s; white-space:nowrap;
+}
+.dcard-action:hover { background:var(--yellow); color:var(--black); }
+.design-cta-bar {
+  margin-top:2px; background:var(--steel); padding:32px 40px;
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+.design-cta-bar p { font-size:15px; color:var(--mist); max-width:600px; line-height:1.7; }
+.design-cta-bar p strong { color:var(--cream); }
+
+/* ===================== MANUFACTURERS ===================== */
+.mfr-section { background:var(--iron); }
+.mfr-intro { display:grid; grid-template-columns:1fr 340px; gap:60px; align-items:start; margin-top:56px; }
+.mfr-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; margin-top:2px; }
+.mfr-card {
+  background:var(--steel); padding:28px 28px 24px; border-left:3px solid transparent;
+  transition:border-color 0.25s, background 0.25s; position:relative;
+}
+.mfr-card:hover { border-left-color:var(--rust); background:var(--smoke); }
+.mfr-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px; gap:12px; }
+.mfr-name { font-family:var(--ff-cond); font-size:20px; font-weight:800; color:var(--white); }
+.mfr-loc { font-size:12px; color:var(--mist); margin-top:3px; }
+.mfr-badge {
+  font-family:var(--ff-cond); font-size:10px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; padding:4px 10px; white-space:nowrap; flex-shrink:0;
+}
+.mfr-badge.verified { background:rgba(76,175,80,0.15); color:#4caf50; border:1px solid rgba(76,175,80,0.3); }
+.mfr-badge.featured { background:rgba(201,74,31,0.15); color:var(--rust-lt); border:1px solid rgba(201,74,31,0.3); }
+.mfr-specialties { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+.mfr-spec-tag {
+  background:var(--smoke); color:var(--mist); font-family:var(--ff-cond);
+  font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:3px 8px;
+}
+.mfr-desc { font-size:13px; color:var(--mist); line-height:1.6; margin-bottom:18px; }
+.mfr-footer { display:flex; align-items:center; justify-content:space-between; padding-top:16px; border-top:1px solid var(--smoke); }
+.mfr-stat { text-align:center; }
+.mfr-stat-val { font-family:var(--ff-display); font-size:22px; color:var(--cream); }
+.mfr-stat-lbl { font-size:10px; color:var(--ash); letter-spacing:1px; text-transform:uppercase; margin-top:2px; }
+.mfr-connect-btn {
+  background:var(--rust); color:var(--white); border:none; padding:10px 22px;
+  font-family:var(--ff-cond); font-size:13px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase;
+  clip-path:polygon(7px 0%, 100% 0%, calc(100% - 7px) 100%, 0% 100%);
+  transition:background 0.2s;
+}
+.mfr-connect-btn:hover { background:var(--rust-lt); }
+
+/* Connect form panel */
+.connect-panel {
+  background:var(--steel); border-top:3px solid var(--yellow); padding:0;
+  position:sticky; top:88px;
+}
+.connect-panel-head { padding:24px 28px; border-bottom:1px solid var(--smoke); }
+.connect-panel-head h4 { font-family:var(--ff-cond); font-size:18px; font-weight:800; color:var(--white); margin-bottom:4px; }
+.connect-panel-head p { font-size:13px; color:var(--mist); }
+.connect-panel-body { padding:24px 28px; }
+.conn-step {
+  display:flex; gap:12px; align-items:flex-start; margin-bottom:16px;
+  padding-bottom:16px; border-bottom:1px solid var(--smoke);
+}
+.conn-step:last-of-type { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.conn-step-num {
+  width:28px; height:28px; background:var(--rust); color:var(--white);
+  font-family:var(--ff-cond); font-size:14px; font-weight:800; display:flex;
+  align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;
+}
+.conn-step-txt h6 { font-family:var(--ff-cond); font-size:14px; font-weight:700; color:var(--white); margin-bottom:3px; }
+.conn-step-txt p { font-size:12px; color:var(--mist); line-height:1.6; }
+.mfr-connect-form { padding:24px 28px; border-top:1px solid var(--smoke); }
+.mfr-connect-form .form-group { margin-bottom:14px; }
+.conn-submit {
+  width:100%; background:var(--yellow); color:var(--black); border:none; padding:14px;
+  font-family:var(--ff-cond); font-size:15px; font-weight:800; letter-spacing:2px;
+  text-transform:uppercase; transition:opacity 0.2s; margin-top:4px;
+}
+.conn-submit:hover { opacity:0.88; }
+.mfr-full-grid { margin-top:48px; }
+.mfr-section-label {
+  font-family:var(--ff-cond); font-size:12px; font-weight:700; letter-spacing:3px;
+  text-transform:uppercase; color:var(--rust); margin-bottom:12px;
+  display:flex; align-items:center; gap:12px;
+}
+.mfr-section-label::after { content:''; flex:0 0 40px; height:2px; background:var(--rust); }
+
 /* RESPONSIVE */
 @media(max-width:1024px){
   .hero-inner{grid-template-columns:1fr}
   .hero-panel{display:none}
   .booking-grid{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr 1fr}
+  .mfr-intro{grid-template-columns:1fr}
+  .connect-panel{position:static}
 }
 @media(max-width:768px){
   .nav-links{display:none}
@@ -339,14 +466,15 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
   .hero{padding:90px 20px 60px}
   .hero h1{font-size:64px}
   .hero-stats{gap:28px;flex-wrap:wrap}
-  .why-grid,.machines-grid,.testi-grid,.steps-row{grid-template-columns:1fr}
+  .why-grid,.machines-grid,.testi-grid,.steps-row,.design-grid,.mfr-grid{grid-template-columns:1fr}
   .cost-table{grid-template-columns:1fr}
   .compare-col:first-child{border-right:none;border-bottom:1px solid var(--smoke)}
   .form-row{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr}
-  .machine-tabs{flex-wrap:wrap}
+  .machine-tabs,.design-tabs{flex-wrap:wrap}
   .tab{border-right:1px solid var(--smoke) !important;margin-bottom:2px}
   .step-card::after{display:none}
+  .design-cta-bar{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
@@ -357,6 +485,8 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
     <div class="logo">CO<span>SOCKET</span><em>MSME Machine Rentals</em></div>
     <ul class="nav-links">
       <li><a href="#machines">Machines</a></li>
+      <li><a href="#designs">Designs</a></li>
+      <li><a href="#manufacturers">Manufacturers</a></li>
       <li><a href="#how">How It Works</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -369,7 +499,7 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-badge">Live in Pune · 20+ Machines Ready</div>
+      <div class="hero-badge">Live in Pune · 100+ Machines Ready</div>
       <h1>RENT.<span class="accent">PRODUCE.</span><span class="outline">SAVE.</span></h1>
       <p class="hero-sub">Why lock <strong>₹15–25 lakhs</strong> in equipment that sits idle? Rent top-grade industrial machines by the day, week, or month — <strong>delivered to your factory in 48 hours.</strong></p>
       <div class="hero-btns">
@@ -377,7 +507,7 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
         <button class="btn-ghost" onclick="goTo('machines')">See All Machines</button>
       </div>
       <div class="hero-stats">
-        <div><div class="stat-num">20<span>+</span></div><div class="stat-label">Machines Available</div></div>
+        <div><div class="stat-num">100<span>+</span></div><div class="stat-label">Machines Available</div></div>
         <div><div class="stat-num">48<span>hr</span></div><div class="stat-label">Delivery to Site</div></div>
         <div><div class="stat-num">₹0</div><div class="stat-label">Maintenance Cost</div></div>
       </div>
@@ -389,7 +519,7 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
         <p>3-axis precision milling for metal parts, moulds & components. Fully calibrated before delivery.</p>
         <div class="price-tag"><span class="amount">₹2,800</span><span class="unit">/ day</span></div>
         <div class="avail"><div class="avail-dot"></div><span>Available Now</span></div>
-        <button class="btn-primary" style="width:100%" onclick="goTo('contact')">Reserve This Machine</button>
+        <button class="btn-primary" style="width:100%" onclick="bookMachine('CNC Milling Machine')">Reserve This Machine</button>
       </div>
       <hr class="panel-divider">
       <div class="mini-stats">
@@ -403,18 +533,30 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
 <!-- TICKER -->
 <div class="ticker-wrap"><div class="ticker">
   <span class="ticker-item">CNC Milling Machine <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">Hydraulic Press 50T <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">Lathe Machine <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">MIG Welding Robot <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">Power Press 25T <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">Band Saw Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Hydraulic Press Brake <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">CNC Laser Cutting Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Offset Printing Press <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Snack Extruder <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Stenter Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Waterjet Cutting Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Flexographic Printing Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">TIG Welding Set <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Dyeing Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Pasteurizer <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Shot Blasting Machine <span class="ticker-sep">—</span></span>
   <span class="ticker-item">Free Delivery in Pune <span class="ticker-sep">—</span></span>
   <span class="ticker-item">CNC Milling Machine <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">Hydraulic Press 50T <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">Lathe Machine <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">MIG Welding Robot <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">Power Press 25T <span class="ticker-sep">—</span></span>
-  <span class="ticker-item">Band Saw Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Hydraulic Press Brake <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">CNC Laser Cutting Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Offset Printing Press <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Snack Extruder <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Stenter Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Waterjet Cutting Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Flexographic Printing Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">TIG Welding Set <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Dyeing Machine <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Pasteurizer <span class="ticker-sep">—</span></span>
+  <span class="ticker-item">Shot Blasting Machine <span class="ticker-sep">—</span></span>
   <span class="ticker-item">Free Delivery in Pune <span class="ticker-sep">—</span></span>
 </div></div>
 
@@ -460,11 +602,88 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
     <p class="section-sub">All machines fully serviced. Delivered within Pune & MIDC in 48 hours.</p>
     <div class="machine-tabs">
       <button class="tab active" onclick="filterMachines('all',this)">All Machines</button>
-      <button class="tab" onclick="filterMachines('metal',this)">Metal Fabrication</button>
-      <button class="tab" onclick="filterMachines('wood',this)">Woodworking</button>
-      <button class="tab" onclick="filterMachines('press',this)">Pressing & Forming</button>
+      <button class="tab" onclick="filterMachines('metal',this)">Fabrication & Metal</button>
+      <button class="tab" onclick="filterMachines('textile',this)">Textile</button>
+      <button class="tab" onclick="filterMachines('food',this)">Food & Agro</button>
+      <button class="tab" onclick="filterMachines('print',this)">Printing & Packaging</button>
     </div>
     <div class="machines-grid" id="machineGrid"></div>
+  </div>
+</section>
+
+<!-- DESIGNS -->
+<section class="section designs-section" id="designs">
+  <div class="section-inner">
+    <div class="section-eyebrow">Blueprint Library</div>
+    <h2 class="section-title">READY-TO-USE<br>DESIGNS</h2>
+    <p class="section-sub">Download production-ready blueprints, DXF files, and CAD drawings. Hand them directly to a manufacturer — or rent our machines and make it yourself.</p>
+    <div class="machine-tabs design-tabs">
+      <button class="tab active" onclick="filterDesigns('all',this)">All Designs</button>
+      <button class="tab" onclick="filterDesigns('sheet',this)">Sheet Metal</button>
+      <button class="tab" onclick="filterDesigns('wood',this)">Woodworking</button>
+      <button class="tab" onclick="filterDesigns('fabrication',this)">Fabrication</button>
+      <button class="tab" onclick="filterDesigns('press',this)">Press Parts</button>
+    </div>
+    <div class="design-grid" id="designGrid"></div>
+    <div class="design-cta-bar">
+      <p><strong>Have your own design?</strong> Upload it below and we'll connect you with a verified manufacturer in Pune who can produce it — or rent the right machine and make it yourself.</p>
+      <button class="btn-primary" onclick="goTo('manufacturers')">Connect with Manufacturer →</button>
+    </div>
+  </div>
+</section>
+
+<!-- MANUFACTURERS -->
+<section class="section mfr-section" id="manufacturers">
+  <div class="section-inner">
+    <div class="section-eyebrow">Verified Network</div>
+    <h2 class="section-title">CONNECT WITH<br>MANUFACTURERS</h2>
+    <p class="section-sub">Have a design file? We'll match you with trusted Pune-based manufacturers from our verified network who can produce it at MSME rates.</p>
+    <div class="mfr-intro">
+      <div>
+        <div class="mfr-section-label">Featured Manufacturers</div>
+        <div class="mfr-grid" id="mfrGrid"></div>
+      </div>
+      <div class="connect-panel">
+        <div class="connect-panel-head">
+          <h4>Send Your Design</h4>
+          <p>Share your file + requirements. We'll match you with the right manufacturer within 24 hours.</p>
+        </div>
+        <div class="connect-panel-body">
+          <div class="conn-step">
+            <div class="conn-step-num">1</div>
+            <div class="conn-step-txt"><h6>Upload Your Design</h6><p>DXF, PDF, STP, IGES, or even a photo/sketch. We accept all formats.</p></div>
+          </div>
+          <div class="conn-step">
+            <div class="conn-step-num">2</div>
+            <div class="conn-step-txt"><h6>We Match & Quote</h6><p>Our team reviews and sends your brief to 2–3 verified manufacturers for quotes.</p></div>
+          </div>
+          <div class="conn-step">
+            <div class="conn-step-num">3</div>
+            <div class="conn-step-txt"><h6>You Choose & Confirm</h6><p>Pick the best quote. We handle delivery coordination. You just approve.</p></div>
+          </div>
+        </div>
+        <div class="mfr-connect-form">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="mfr-name" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Number</label>
+            <input type="tel" id="mfr-phone" placeholder="10-digit mobile">
+          </div>
+          <div class="form-group">
+            <label>What Do You Need Made?</label>
+            <textarea rows="3" id="mfr-req" placeholder="Describe the part or product. Quantity, material, finish needed..." style="resize:vertical"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Design File (optional — describe or share link)</label>
+            <input type="text" id="mfr-file" placeholder="e.g. Google Drive link, or describe your design">
+          </div>
+          <div id="mfr-selected" style="display:none;font-family:var(--ff-cond);font-size:13px;font-weight:700;color:var(--rust-lt);letter-spacing:1px;margin-bottom:12px;padding:10px 14px;background:rgba(201,74,31,0.12);border-left:3px solid var(--rust)"></div>
+          <button class="conn-submit" onclick="submitMfrConnect()">Get Manufacturer Quotes →</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -494,14 +713,136 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
           <label>Machine Needed</label>
           <select id="bk-machine">
             <option value="">Select a machine</option>
-            <option>CNC Milling Machine</option>
-            <option>Hydraulic Press (50 Ton)</option>
-            <option>Lathe Machine (Heavy Duty)</option>
-            <option>MIG Welding Robot</option>
-            <option>Power Press (25 Ton)</option>
-            <option>Band Saw Machine</option>
-            <option>Radial Drilling Machine</option>
-            <option>Roll Forming Machine</option>
+            <optgroup label="── Fabrication & Metalworking ──">
+              <option>CNC Milling Machine</option>
+              <option>CNC Lathe Machine</option>
+              <option>CNC Turning Center</option>
+              <option>CNC Wire EDM Machine</option>
+              <option>CNC Plasma Cutter</option>
+              <option>CNC Laser Cutting Machine</option>
+              <option>Waterjet Cutting Machine</option>
+              <option>Hydraulic Press Brake</option>
+              <option>Mechanical Press Brake</option>
+              <option>Mechanical Shearing Machine</option>
+              <option>Hydraulic Shearing Machine</option>
+              <option>Pipe Bending Machine</option>
+              <option>Tube Notching Machine</option>
+              <option>Pillar Drill Machine</option>
+              <option>Radial Drilling Machine</option>
+              <option>Magnetic Drill</option>
+              <option>Surface Grinding Machine</option>
+              <option>Cylindrical Grinding Machine</option>
+              <option>Tool &amp; Cutter Grinder</option>
+              <option>Bench Grinder / Buffing Machine</option>
+              <option>MIG Welding Set</option>
+              <option>TIG Welding Set</option>
+              <option>ARC Welding Set</option>
+              <option>Spot Welding Machine</option>
+              <option>Submerged Arc Welding Machine</option>
+              <option>Resistance Welding Machine</option>
+              <option>Band Saw Machine</option>
+              <option>Circular Saw Machine</option>
+              <option>Hacksaw Cutting Machine</option>
+              <option>Electric Hand Drill</option>
+              <option>Portable Cutting Machine</option>
+              <option>Sheet Metal Roller</option>
+              <option>Section Rolling Machine</option>
+              <option>Angle Bending Machine</option>
+              <option>Notching Machine</option>
+              <option>Tapping Machine</option>
+              <option>Punching Press</option>
+              <option>Deburring Machine</option>
+              <option>Shot Blasting Machine</option>
+              <option>Paint Booth / Spray Chamber</option>
+              <option>Annealing Furnace</option>
+              <option>Heat Treatment Oven</option>
+              <option>CNC Boring Machine</option>
+              <option>Roll Forming Machine</option>
+              <option>Electromagnetic Chuck Grinder</option>
+              <option>Induction Heating Machine</option>
+              <option>Ironworker Machine</option>
+            </optgroup>
+            <optgroup label="── Textile Processing ──">
+              <option>Power Loom</option>
+              <option>Embroidery Machine</option>
+              <option>Knitting Machine</option>
+              <option>Overlock Sewing Machine</option>
+              <option>Flatbed Sewing Machine</option>
+              <option>Buttonhole Machine</option>
+              <option>Fabric Cutting Machine</option>
+              <option>Hydro-Extractor</option>
+              <option>Garment Finishing Machine</option>
+              <option>Steam Ironing / Pressing Unit</option>
+              <option>Screen Printing Machine</option>
+              <option>Dyeing Machine</option>
+              <option>Yarn Winding Machine</option>
+              <option>Spinning Frame</option>
+              <option>Sizing Machine</option>
+              <option>Calendering Machine</option>
+              <option>Compacting Machine</option>
+              <option>Stenter Machine</option>
+              <option>Fusing Machine</option>
+              <option>Fabric Inspection Machine</option>
+              <option>Lint Cleaning Machine</option>
+              <option>Garment Folding Machine</option>
+              <option>Label Sewing Machine</option>
+              <option>Heat Transfer Press</option>
+              <option>Warping Machine</option>
+            </optgroup>
+            <optgroup label="── Food &amp; Agro Processing ──">
+              <option>Flour Mill</option>
+              <option>Spice Grinder / Pulverizer</option>
+              <option>Oil Expeller</option>
+              <option>Dal Mill</option>
+              <option>Rice Huller</option>
+              <option>Vegetable Cutter / Chopper</option>
+              <option>Fruit Pulping Machine</option>
+              <option>Juice Extractor</option>
+              <option>Tray Dryer / Dehydrator</option>
+              <option>Food Mixer / Blender</option>
+              <option>Pasteurizer</option>
+              <option>Bottle Filling Machine</option>
+              <option>Sauce / Ketchup Maker</option>
+              <option>Biscuit / Cookie Making Machine</option>
+              <option>Snack Extruder</option>
+              <option>Packaging / Pouch Sealing Machine</option>
+              <option>Milk Separator</option>
+              <option>Atta Kneading Machine</option>
+              <option>Bakery Oven</option>
+              <option>Ice Cream / Freezing Machine</option>
+              <option>Jar Washing Machine</option>
+              <option>Retort Sterilizer</option>
+              <option>Ultrasonic Homogenizer</option>
+              <option>Cereal Flaking Machine</option>
+              <option>Chocolate Tempering Machine</option>
+            </optgroup>
+            <optgroup label="── Printing &amp; Packaging ──">
+              <option>Offset Printing Press</option>
+              <option>Digital Printing Machine</option>
+              <option>Flexographic Printing Machine</option>
+              <option>Screen Printing Setup</option>
+              <option>Label Printing Machine</option>
+              <option>Laminator</option>
+              <option>Die Cutting Machine</option>
+              <option>Folder Gluer</option>
+              <option>UV Curing Machine</option>
+              <option>Paper Cutting Machine</option>
+              <option>Book Binding Machine</option>
+              <option>Pillow Pouch Packing Machine</option>
+              <option>Shrink Wrapping Machine</option>
+              <option>Carton Making Machine</option>
+              <option>Pad Printing Machine</option>
+              <option>Hot Foil Stamping Unit</option>
+              <option>Thermal Transfer Printer</option>
+              <option>Box Stitching Machine</option>
+              <option>Roll to Roll Slitting Machine</option>
+              <option>Envelope Making Machine</option>
+              <option>Wrapping Paper Machine</option>
+              <option>Embossing Machine</option>
+              <option>Inkjet Coding Machine</option>
+              <option>Self-Adhesive Labelling Machine</option>
+              <option>Creasing &amp; Perforating Machine</option>
+            </optgroup>
             <option>Other (mention in notes)</option>
           </select>
         </div>
@@ -575,13 +916,17 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
         <p class="footer-desc">Pune's trusted MSME machine rental service. Helping small factories produce more without buying heavy equipment.</p>
       </div>
       <div class="footer-col"><h5>Machines</h5><ul>
-        <li onclick="goTo('machines')">CNC Machines</li><li onclick="goTo('machines')">Hydraulic Press</li>
-        <li onclick="goTo('machines')">Lathe Machines</li><li onclick="goTo('machines')">Welding Robots</li>
-        <li onclick="goTo('machines')">Power Press</li>
+        <li onclick="goTo('machines')">Fabrication & Metal</li>
+        <li onclick="goTo('machines')">Textile Processing</li>
+        <li onclick="goTo('machines')">Food & Agro</li>
+        <li onclick="goTo('machines')">Printing & Packaging</li>
+        <li onclick="goTo('machines')">100+ Machines Total</li>
       </ul></div>
-      <div class="footer-col"><h5>Company</h5><ul>
-        <li onclick="goTo('pricing')">Why Rent</li><li onclick="goTo('how')">How It Works</li>
-        <li onclick="goTo('contact')">Book a Machine</li><li onclick="openWhatsApp()">WhatsApp Us</li>
+      <div class="footer-col"><h5>Services</h5><ul>
+        <li onclick="goTo('designs')">Design Library</li>
+        <li onclick="goTo('manufacturers')">Find Manufacturers</li>
+        <li onclick="goTo('contact')">Book a Machine</li>
+        <li onclick="openWhatsApp()">WhatsApp Us</li>
       </ul></div>
       <div class="footer-col"><h5>Areas Served</h5><ul>
         <li>Bhosari MIDC</li><li>Chakan</li><li>Hadapsar</li><li>Pimpri-Chinchwad</li><li>Ranjangaon</li>
@@ -605,6 +950,26 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
   </div>
 </div>
 
+<!-- DESIGN FILE REQUEST MODAL -->
+<div class="modal-overlay" id="designFileModal">
+  <div class="modal" style="max-width:400px">
+    <button class="modal-close" onclick="closeDesignModal()">×</button>
+    <div class="success-icon">📐</div>
+    <h3 style="font-size:24px;margin-bottom:6px">Get This File</h3>
+    <p id="df-title" style="color:var(--rust);font-family:var(--ff-cond);font-size:15px;font-weight:700;letter-spacing:1px;margin-bottom:20px"></p>
+    <p style="margin-bottom:20px">We'll send the file directly to your WhatsApp. Enter your details below:</p>
+    <div class="form-group" style="text-align:left">
+      <label>Your Name</label>
+      <input type="text" id="df-name" placeholder="Full name">
+    </div>
+    <div class="form-group" style="text-align:left">
+      <label>WhatsApp Number</label>
+      <input type="tel" id="df-phone" placeholder="10-digit mobile number">
+    </div>
+    <button class="submit-btn" id="dfSubmitBtn" onclick="submitDesignRequest()" style="clip-path:none;margin-top:8px">Send Me This File →</button>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -613,24 +978,154 @@ footer { background:var(--iron); border-top:1px solid var(--smoke); padding:60px
    STEP 1 — After creating your Supabase project, paste your
    Project URL and anon key below (from Supabase → Settings → API)
    ============================================================ */
-const SUPABASE_URL  = 'https://lzvstkrsessglefqckpm.supabase.co';
+const SUPABASE_URL  = 'https://lzvstkrsessglefqckpm.supabase.co/rest/v1/';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6dnN0a3JzZXNzZ2xlZnFja3BtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0MDczMDYsImV4cCI6MjA5Mzk4MzMwNn0.i2VLJ45JyWcVdV_pC6leBBQmrTEaWc-H6MVRQYJsxS0';
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
 /* ---- Machine data ---- */
 const machines = [
-  {cat:'metal',icon:'⚙️',name:'CNC Milling Machine',desc:'3-axis precision milling for metal parts, moulds & components.',price:'₹2,800',unit:'/day'},
-  {cat:'metal',icon:'🔩',name:'Lathe Machine (Heavy Duty)',desc:'Heavy duty lathe for turning, facing and threading operations.',price:'₹1,800',unit:'/day'},
-  {cat:'press',icon:'🏗️',name:'Hydraulic Press (50 Ton)',desc:'50-ton capacity for sheet metal forming, bending and stamping.',price:'₹3,200',unit:'/day'},
-  {cat:'press',icon:'💪',name:'Power Press (25 Ton)',desc:'Ideal for punching, blanking and progressive die operations.',price:'₹2,200',unit:'/day'},
-  {cat:'metal',icon:'🤖',name:'MIG Welding Robot',desc:'Semi-automated welding for consistent bead quality on steel frames.',price:'₹3,800',unit:'/day'},
-  {cat:'wood', icon:'🪚',name:'Band Saw Machine',desc:'Industrial band saw for wood cutting, curved cuts and resawing.',price:'₹900',unit:'/day'},
-  {cat:'metal',icon:'🔨',name:'Radial Drilling Machine',desc:'For drilling, reaming and tapping holes in metal fabrication work.',price:'₹1,200',unit:'/day'},
-  {cat:'press',icon:'📦',name:'Roll Forming Machine',desc:'Continuous forming of metal strips into profiles and sections.',price:'₹4,500',unit:'/day'},
-  {cat:'wood', icon:'🪵',name:'Planer Thicknesser',desc:'Precision wood planning and thickness reduction in one pass.',price:'₹1,100',unit:'/day'},
+  /* ── FABRICATION & METALWORKING ── */
+  {cat:'metal',icon:'⚙️', name:'CNC Milling Machine',         desc:'3-axis precision milling for metal parts, moulds & components. Fully calibrated before delivery.',                  price:'₹2,800',unit:'/day'},
+  {cat:'metal',icon:'🔩', name:'CNC Lathe Machine',            desc:'High-speed CNC lathe for turning, boring and threading with tight tolerances.',                                     price:'₹2,400',unit:'/day'},
+  {cat:'metal',icon:'🎯', name:'CNC Turning Center',           desc:'Multi-axis turning center with live tooling. Ideal for complex rotational parts.',                                   price:'₹3,200',unit:'/day'},
+  {cat:'metal',icon:'⚡', name:'CNC Wire EDM Machine',         desc:'Wire electrical discharge machining for intricate die and mould work in hardened steel.',                            price:'₹4,200',unit:'/day'},
+  {cat:'metal',icon:'🔥', name:'CNC Plasma Cutter',            desc:'High-speed plasma cutting for MS, SS and aluminium sheets up to 25mm thick.',                                        price:'₹2,600',unit:'/day'},
+  {cat:'metal',icon:'💡', name:'CNC Laser Cutting Machine',    desc:'Fiber laser cutter for precision sheet metal cutting with minimal heat-affected zone.',                              price:'₹5,500',unit:'/day'},
+  {cat:'metal',icon:'💧', name:'Waterjet Cutting Machine',     desc:'Cold-cutting waterjet for metals, composites and stone. No heat distortion.',                                        price:'₹4,800',unit:'/day'},
+  {cat:'metal',icon:'🏗️', name:'Hydraulic Press Brake',        desc:'CNC-controlled hydraulic press brake for accurate sheet metal bending up to 200T.',                                 price:'₹3,200',unit:'/day'},
+  {cat:'metal',icon:'🔧', name:'Mechanical Press Brake',       desc:'Mechanical press brake for repetitive bending jobs on mild steel and aluminium.',                                     price:'₹1,800',unit:'/day'},
+  {cat:'metal',icon:'✂️', name:'Mechanical Shearing Machine',  desc:'High-speed mechanical shearing for straight-line cutting of metal sheets.',                                          price:'₹1,500',unit:'/day'},
+  {cat:'metal',icon:'💪', name:'Hydraulic Shearing Machine',   desc:'Heavy-duty hydraulic shear for thick plate cutting up to 12mm MS.',                                                  price:'₹2,000',unit:'/day'},
+  {cat:'metal',icon:'🌀', name:'Pipe Bending Machine',         desc:'CNC pipe bender for round, square and rectangular tube bending without ovality.',                                     price:'₹1,800',unit:'/day'},
+  {cat:'metal',icon:'🔀', name:'Tube Notching Machine',        desc:'Tube notcher for saddle cuts and angle notches in round tubing for frame fabrication.',                              price:'₹900', unit:'/day'},
+  {cat:'metal',icon:'🗜️', name:'Pillar Drill Machine',         desc:'Heavy-duty pillar drill for accurate drilling, reaming and countersinking in metal.',                                price:'₹800', unit:'/day'},
+  {cat:'metal',icon:'🔨', name:'Radial Drilling Machine',      desc:'Radial arm drill for drilling large workpieces. Covers large areas without repositioning.',                          price:'₹1,200',unit:'/day'},
+  {cat:'metal',icon:'🧲', name:'Magnetic Drill',               desc:'Portable magnetic base drill for on-site structural steel drilling.',                                                price:'₹600', unit:'/day'},
+  {cat:'metal',icon:'🪨', name:'Surface Grinding Machine',     desc:'Precision surface grinder for flat, smooth finishes on hardened steel components.',                                   price:'₹1,600',unit:'/day'},
+  {cat:'metal',icon:'⭕', name:'Cylindrical Grinding Machine', desc:'OD/ID cylindrical grinder for round shafts, bushes and bores.',                                                      price:'₹2,000',unit:'/day'},
+  {cat:'metal',icon:'🛠️', name:'Tool & Cutter Grinder',        desc:'Re-sharpens end mills, drills, reamers and other cutting tools.',                                                    price:'₹1,000',unit:'/day'},
+  {cat:'metal',icon:'🪚', name:'Bench Grinder / Buffing Machine',desc:'Dual-wheel bench grinder for deburring, sharpening and polishing small parts.',                                   price:'₹400', unit:'/day'},
+  {cat:'metal',icon:'🤖', name:'MIG Welding Set',              desc:'Semi-automatic MIG welding for steel frames and sheet metal fabrication.',                                            price:'₹800', unit:'/day'},
+  {cat:'metal',icon:'🔆', name:'TIG Welding Set',              desc:'Precision TIG welding for stainless steel, aluminium and thin-gauge metals.',                                         price:'₹1,000',unit:'/day'},
+  {cat:'metal',icon:'⚡', name:'ARC Welding Set',              desc:'Stick electrode arc welding. Robust and versatile for structural and repair work.',                                   price:'₹400', unit:'/day'},
+  {cat:'metal',icon:'🔵', name:'Spot Welding Machine',         desc:'Resistance spot welding for sheet metal assemblies. Fast cycle times.',                                              price:'₹1,200',unit:'/day'},
+  {cat:'metal',icon:'🌊', name:'Submerged Arc Welding Machine',desc:'SAW for thick plate and heavy structural weldments. High deposition rate.',                                          price:'₹3,500',unit:'/day'},
+  {cat:'metal',icon:'🔗', name:'Resistance Welding Machine',   desc:'Seam and projection welding for automotive and appliance sheet metal parts.',                                         price:'₹2,200',unit:'/day'},
+  {cat:'metal',icon:'🪚', name:'Band Saw Machine',             desc:'Industrial band saw for metal and structural cutting. Bi-metal blade.',                                              price:'₹900', unit:'/day'},
+  {cat:'metal',icon:'🔵', name:'Circular Saw Machine',         desc:'Cold saw for burr-free cutting of solid bars, pipes and profiles.',                                                   price:'₹700', unit:'/day'},
+  {cat:'metal',icon:'⬛', name:'Hacksaw Cutting Machine',      desc:'Power hacksaw for cutting solid MS bars, rods and structural sections.',                                              price:'₹500', unit:'/day'},
+  {cat:'metal',icon:'🔩', name:'Electric Hand Drill',          desc:'Industrial-grade electric drill for site use. Variable speed.',                                                       price:'₹300', unit:'/day'},
+  {cat:'metal',icon:'🔪', name:'Portable Cutting Machine',     desc:'Portable angle grinder / cutting machine for on-site metal cutting.',                                                price:'₹250', unit:'/day'},
+  {cat:'metal',icon:'🌀', name:'Sheet Metal Roller',           desc:'3-roll plate roller for forming cylinders, cones and curved metal sheets.',                                           price:'₹2,200',unit:'/day'},
+  {cat:'metal',icon:'📐', name:'Section Rolling Machine',      desc:'Section roller for bending angle, channel, flat bar and beam profiles.',                                              price:'₹1,800',unit:'/day'},
+  {cat:'metal',icon:'📏', name:'Angle Bending Machine',        desc:'Hydraulic angle bender for forming mild steel angles into frames and brackets.',                                      price:'₹1,200',unit:'/day'},
+  {cat:'metal',icon:'🔲', name:'Notching Machine',             desc:'Corner notcher for sheet metal notching before box bending.',                                                         price:'₹700', unit:'/day'},
+  {cat:'metal',icon:'🔩', name:'Tapping Machine',              desc:'Bench or floor tapping machine for threading holes in metal parts.',                                                  price:'₹600', unit:'/day'},
+  {cat:'press',icon:'💢', name:'Punching Press',               desc:'Mechanical punching press for blanking, piercing and forming sheet metal.',                                           price:'₹2,000',unit:'/day'},
+  {cat:'metal',icon:'🪥', name:'Deburring Machine',            desc:'Automated deburring and edge rounding for sheet metal parts after cutting.',                                          price:'₹1,400',unit:'/day'},
+  {cat:'metal',icon:'💥', name:'Shot Blasting Machine',        desc:'Tumble or table shot blaster for surface cleaning and preparation of castings.',                                      price:'₹2,500',unit:'/day'},
+  {cat:'metal',icon:'🎨', name:'Paint Booth / Spray Chamber', desc:'Enclosed spray booth with exhaust filtration for safe industrial painting.',                                           price:'₹3,000',unit:'/day'},
+  {cat:'metal',icon:'🔥', name:'Annealing Furnace',            desc:'Batch annealing furnace for stress relief, normalising and softening of steel.',                                      price:'₹4,000',unit:'/day'},
+  {cat:'metal',icon:'♨️', name:'Heat Treatment Oven',          desc:'Precision heat treatment oven for hardening, tempering and case hardening.',                                          price:'₹3,800',unit:'/day'},
+  /* 5 Dummy – Metal */
+  {cat:'metal',icon:'🔭', name:'CNC Boring Machine',           desc:'Horizontal boring machine for large housings, gearboxes and engine blocks.',                                         price:'₹3,600',unit:'/day'},
+  {cat:'metal',icon:'🪤', name:'Roll Forming Machine',         desc:'Continuous roll forming for metal strips into C-channels, Z-purlins and custom profiles.',                           price:'₹4,500',unit:'/day'},
+  {cat:'metal',icon:'🧲', name:'Electromagnetic Chuck Grinder',desc:'Surface grinder with electromagnetic chuck for precision flat-surface finishing.',                                   price:'₹1,800',unit:'/day'},
+  {cat:'metal',icon:'🔦', name:'Induction Heating Machine',    desc:'Induction heater for press-fit assembly, hardening and brazing of metal parts.',                                     price:'₹2,800',unit:'/day'},
+  {cat:'metal',icon:'🧱', name:'Ironworker Machine',           desc:'Multipurpose ironworker for punching, notching, shearing and bending in one unit.',                                  price:'₹2,600',unit:'/day'},
+
+  /* ── TEXTILE PROCESSING ── */
+  {cat:'textile',icon:'🧵', name:'Power Loom',                 desc:'Industrial power loom for weaving fabric in cotton, polyester and blended yarns.',                                   price:'₹1,500',unit:'/day'},
+  {cat:'textile',icon:'🪡', name:'Embroidery Machine',         desc:'Multi-head embroidery machine for logos, designs and decorative patterns on fabric.',                                price:'₹2,000',unit:'/day'},
+  {cat:'textile',icon:'🧶', name:'Knitting Machine',           desc:'Flat bed or circular knitting machine for producing knitwear and stretch fabrics.',                                  price:'₹1,800',unit:'/day'},
+  {cat:'textile',icon:'✂️', name:'Overlock Sewing Machine',    desc:'Industrial overlocker for edge finishing and seaming of garments at high speed.',                                    price:'₹500', unit:'/day'},
+  {cat:'textile',icon:'🧷', name:'Flatbed Sewing Machine',     desc:'Heavy-duty flatbed sewing machine for stitching denim, canvas and thick fabric.',                                    price:'₹400', unit:'/day'},
+  {cat:'textile',icon:'🕳️', name:'Buttonhole Machine',         desc:'Automatic buttonhole machine for consistent, neat buttonholes on shirts and jackets.',                               price:'₹600', unit:'/day'},
+  {cat:'textile',icon:'✂️', name:'Fabric Cutting Machine',     desc:'Straight knife or band knife fabric cutter for multi-layer cutting in garment production.',                          price:'₹800', unit:'/day'},
+  {cat:'textile',icon:'💧', name:'Hydro-Extractor',            desc:'Centrifugal hydro-extractor for water extraction from fabric after washing.',                                         price:'₹1,000',unit:'/day'},
+  {cat:'textile',icon:'👔', name:'Garment Finishing Machine',  desc:'Automated garment finisher for crease-free pressing of shirts, trousers and garments.',                             price:'₹1,200',unit:'/day'},
+  {cat:'textile',icon:'♨️', name:'Steam Ironing / Pressing Unit',desc:'Industrial steam press for high-output garment ironing and crease setting.',                                      price:'₹700', unit:'/day'},
+  {cat:'textile',icon:'🖨️', name:'Screen Printing Machine',    desc:'Flat-bed screen printing machine for fabric printing in multiple colours.',                                          price:'₹1,500',unit:'/day'},
+  {cat:'textile',icon:'🎨', name:'Dyeing Machine',             desc:'Yarn or fabric dyeing machine with precise temperature control.',                                                     price:'₹2,500',unit:'/day'},
+  {cat:'textile',icon:'🧶', name:'Yarn Winding Machine',       desc:'Cone-to-cone or cheese winding machine for yarn preparation.',                                                        price:'₹900', unit:'/day'},
+  {cat:'textile',icon:'🌀', name:'Spinning Frame',             desc:'Ring spinning frame for converting drawn fibre into yarn.',                                                            price:'₹3,000',unit:'/day'},
+  {cat:'textile',icon:'📏', name:'Sizing Machine',             desc:'Warp sizing machine for applying starch or size to yarn for weaving.',                                                price:'₹2,200',unit:'/day'},
+  {cat:'textile',icon:'🗜️', name:'Calendering Machine',        desc:'Multi-roll calender for giving a smooth glossy finish to fabric.',                                                   price:'₹2,800',unit:'/day'},
+  {cat:'textile',icon:'🔄', name:'Compacting Machine',         desc:'Fabric compacting machine to control shrinkage in jersey and knit fabric.',                                           price:'₹2,000',unit:'/day'},
+  {cat:'textile',icon:'📐', name:'Stenter Machine',            desc:'Tenter frame for heat-setting, drying and finishing of woven and knitted fabrics.',                                  price:'₹4,500',unit:'/day'},
+  {cat:'textile',icon:'🔥', name:'Fusing Machine',             desc:'Flatbed fusing press for bonding interlining to fabric in garment construction.',                                     price:'₹1,200',unit:'/day'},
+  {cat:'textile',icon:'🔍', name:'Fabric Inspection Machine',  desc:'Motorised fabric inspection frame with backlit panel for quality checking.',                                          price:'₹800', unit:'/day'},
+  /* 5 Dummy – Textile */
+  {cat:'textile',icon:'🧹', name:'Lint Cleaning Machine',      desc:'Removes lint, fly and dust from fabric surface before inspection or packing.',                                        price:'₹600', unit:'/day'},
+  {cat:'textile',icon:'📦', name:'Garment Folding Machine',    desc:'Automated garment folder for consistent folding of T-shirts and knitwear.',                                          price:'₹900', unit:'/day'},
+  {cat:'textile',icon:'🏷️', name:'Label Sewing Machine',       desc:'Industrial label stitching machine for attaching woven and printed labels.',                                         price:'₹500', unit:'/day'},
+  {cat:'textile',icon:'🌡️', name:'Heat Transfer Press',        desc:'Flat-bed heat press for sublimation printing and heat-transfer labels on garments.',                                 price:'₹700', unit:'/day'},
+  {cat:'textile',icon:'🔀', name:'Warping Machine',            desc:'Sectional or direct warping machine for preparing warp beams for weaving.',                                           price:'₹2,000',unit:'/day'},
+
+  /* ── FOOD & AGRO PROCESSING ── */
+  {cat:'food',icon:'🌾', name:'Flour Mill',                    desc:'Roller flour mill for milling wheat into fine atta, maida and semolina.',                                            price:'₹1,500',unit:'/day'},
+  {cat:'food',icon:'🌶️', name:'Spice Grinder / Pulverizer',   desc:'High-speed pulverizer for fine grinding of spices, grains and dried herbs.',                                         price:'₹900', unit:'/day'},
+  {cat:'food',icon:'🫒', name:'Oil Expeller',                  desc:'Screw press oil expeller for groundnut, sesame, sunflower and coconut oil extraction.',                              price:'₹2,000',unit:'/day'},
+  {cat:'food',icon:'🫘', name:'Dal Mill',                      desc:'Pulse processing mill for cleaning, dehusking and splitting lentils and pulses.',                                    price:'₹1,800',unit:'/day'},
+  {cat:'food',icon:'🌾', name:'Rice Huller',                   desc:'Rubber-roller rice huller for paddy dehusking and milling.',                                                          price:'₹1,200',unit:'/day'},
+  {cat:'food',icon:'🥕', name:'Vegetable Cutter / Chopper',   desc:'Industrial vegetable dicer and chopper for high-volume food processing.',                                             price:'₹600', unit:'/day'},
+  {cat:'food',icon:'🍅', name:'Fruit Pulping Machine',         desc:'Pulper and finisher for mango, tomato, guava and other fruit pulp production.',                                      price:'₹1,500',unit:'/day'},
+  {cat:'food',icon:'🍋', name:'Juice Extractor',              desc:'Commercial juice extractor for fruits and vegetables. Continuous feed.',                                               price:'₹800', unit:'/day'},
+  {cat:'food',icon:'🌡️', name:'Tray Dryer / Dehydrator',      desc:'Electric or steam-heated tray dryer for dehydrating vegetables, fruits and spices.',                                 price:'₹2,000',unit:'/day'},
+  {cat:'food',icon:'🍲', name:'Food Mixer / Blender',         desc:'Industrial ribbon blender or sigma mixer for mixing spice blends, dough and pastes.',                                 price:'₹1,200',unit:'/day'},
+  {cat:'food',icon:'🥛', name:'Pasteurizer',                  desc:'Plate pasteurizer for milk, juice and liquid food products. HTST compatible.',                                         price:'₹3,500',unit:'/day'},
+  {cat:'food',icon:'🍾', name:'Bottle Filling Machine',        desc:'Semi or fully automatic filling machine for bottles, jars and pouches.',                                              price:'₹2,500',unit:'/day'},
+  {cat:'food',icon:'🥫', name:'Sauce / Ketchup Maker',        desc:'Jacketed kettle with agitator for cooking and processing sauces and ketchup.',                                        price:'₹1,800',unit:'/day'},
+  {cat:'food',icon:'🍪', name:'Biscuit / Cookie Making Machine',desc:'Rotary moulding machine for biscuits, cookies and hard-dough confectionery.',                                      price:'₹4,000',unit:'/day'},
+  {cat:'food',icon:'🍟', name:'Snack Extruder',               desc:'Single or twin-screw extruder for namkeen, corn puffs and pasta products.',                                           price:'₹5,000',unit:'/day'},
+  {cat:'food',icon:'📦', name:'Packaging / Pouch Sealing Machine',desc:'Form-fill-seal machine for packing snacks, spices and granular products in pouches.',                           price:'₹3,000',unit:'/day'},
+  {cat:'food',icon:'🥛', name:'Milk Separator',               desc:'Centrifugal cream separator for separating fat from milk.',                                                            price:'₹1,500',unit:'/day'},
+  {cat:'food',icon:'🫓', name:'Atta Kneading Machine',        desc:'Dough kneader for large-scale kneading of wheat dough for roti and bread.',                                           price:'₹800', unit:'/day'},
+  {cat:'food',icon:'🍞', name:'Bakery Oven',                  desc:'Deck or rotary rack oven for baking bread, buns, cakes and pastries.',                                                price:'₹3,000',unit:'/day'},
+  {cat:'food',icon:'🍦', name:'Ice Cream / Freezing Machine', desc:'Batch freezer and continuous freezer for ice cream, kulfi and frozen desserts.',                                      price:'₹2,800',unit:'/day'},
+  /* 5 Dummy – Food */
+  {cat:'food',icon:'🫙', name:'Jar Washing Machine',           desc:'High-pressure rotary jar washer for cleaning glass and PET containers before filling.',                              price:'₹1,200',unit:'/day'},
+  {cat:'food',icon:'🌡️', name:'Retort Sterilizer',            desc:'Autoclave retort for sterilizing canned and packaged food products.',                                                 price:'₹4,500',unit:'/day'},
+  {cat:'food',icon:'🔊', name:'Ultrasonic Homogenizer',        desc:'Ultrasonic processor for emulsifying, dispersing and homogenizing liquid food.',                                     price:'₹3,200',unit:'/day'},
+  {cat:'food',icon:'🥣', name:'Cereal Flaking Machine',        desc:'Roller flaker for producing oat, wheat and corn flakes from whole grain.',                                           price:'₹2,600',unit:'/day'},
+  {cat:'food',icon:'🍫', name:'Chocolate Tempering Machine',   desc:'Automatic chocolate melter and tempering machine for confectionery production.',                                     price:'₹2,000',unit:'/day'},
+
+  /* ── PRINTING & PACKAGING ── */
+  {cat:'print',icon:'📰', name:'Offset Printing Press',        desc:'Single or multi-colour offset press for high-volume commercial printing.',                                           price:'₹5,000',unit:'/day'},
+  {cat:'print',icon:'🖨️', name:'Digital Printing Machine',     desc:'Large-format digital printer for banners, labels, stickers and packaging.',                                         price:'₹3,500',unit:'/day'},
+  {cat:'print',icon:'🎠', name:'Flexographic Printing Machine',desc:'Flexo press for flexible packaging, labels and corrugated carton printing.',                                         price:'₹4,500',unit:'/day'},
+  {cat:'print',icon:'🎨', name:'Screen Printing Setup',        desc:'Flat-bed or rotary screen printing for paper, plastic and fabric substrates.',                                       price:'₹1,500',unit:'/day'},
+  {cat:'print',icon:'🏷️', name:'Label Printing Machine',       desc:'Narrow-web label press for product labels, barcode labels and adhesive stickers.',                                  price:'₹2,800',unit:'/day'},
+  {cat:'print',icon:'✨', name:'Laminator',                    desc:'Thermal or BOPP laminator for gloss and matt lamination of printed sheets.',                                          price:'₹1,800',unit:'/day'},
+  {cat:'print',icon:'✂️', name:'Die Cutting Machine',          desc:'Flat-bed or rotary die cutter for cutting custom shapes from paper and board.',                                      price:'₹2,200',unit:'/day'},
+  {cat:'print',icon:'📦', name:'Folder Gluer',                 desc:'Automatic folder-gluer for folding and gluing cartons at high speed.',                                               price:'₹4,000',unit:'/day'},
+  {cat:'print',icon:'💡', name:'UV Curing Machine',            desc:'UV conveyor dryer for instant curing of UV inks, coatings and adhesives.',                                           price:'₹2,500',unit:'/day'},
+  {cat:'print',icon:'✂️', name:'Paper Cutting Machine',        desc:'Programmable guillotine for precision trimming of paper, board and printed sheets.',                                 price:'₹1,500',unit:'/day'},
+  {cat:'print',icon:'📚', name:'Book Binding Machine',         desc:'Perfect binding or saddle-stitching machine for booklets, catalogues and manuals.',                                  price:'₹2,000',unit:'/day'},
+  {cat:'print',icon:'🛏️', name:'Pillow Pouch Packing Machine', desc:'VFFS machine for packing chips, biscuits and granules in pillow pouches.',                                         price:'₹3,000',unit:'/day'},
+  {cat:'print',icon:'🔥', name:'Shrink Wrapping Machine',      desc:'POF/PVC shrink wrapping machine for product bundling and retail packaging.',                                          price:'₹2,200',unit:'/day'},
+  {cat:'print',icon:'📦', name:'Carton Making Machine',        desc:'Carton erecting and forming machine for corrugated and duplex board boxes.',                                          price:'₹3,500',unit:'/day'},
+  {cat:'print',icon:'🖋️', name:'Pad Printing Machine',         desc:'Multi-colour pad printer for printing on 3D, irregular or curved surfaces.',                                        price:'₹1,800',unit:'/day'},
+  {cat:'print',icon:'⭐', name:'Hot Foil Stamping Unit',       desc:'Flat-bed foil stamper for gold, silver and holographic foil on print.',                                              price:'₹2,000',unit:'/day'},
+  {cat:'print',icon:'🖨️', name:'Thermal Transfer Printer',    desc:'Industrial thermal transfer printer for barcode labels, tags and tickets.',                                           price:'₹800', unit:'/day'},
+  {cat:'print',icon:'📌', name:'Box Stitching Machine',        desc:'Wire stitching machine for closing corrugated boxes and board cartons.',                                              price:'₹1,200',unit:'/day'},
+  {cat:'print',icon:'🌀', name:'Roll to Roll Slitting Machine',desc:'Precision slitter-rewinder for cutting roll stock into narrow width rolls.',                                         price:'₹2,800',unit:'/day'},
+  {cat:'print',icon:'✉️', name:'Envelope Making Machine',      desc:'Automatic envelope making machine for A4, DL and custom-size envelopes.',                                            price:'₹2,500',unit:'/day'},
+  /* 5 Dummy – Print */
+  {cat:'print',icon:'🎁', name:'Wrapping Paper Machine',       desc:'Roll-to-sheet wrapping paper cutter and perforator for gift and industrial wrap.',                                   price:'₹1,600',unit:'/day'},
+  {cat:'print',icon:'🔡', name:'Embossing Machine',            desc:'Blind embossing and debossing press for premium packaging and stationery.',                                           price:'₹2,200',unit:'/day'},
+  {cat:'print',icon:'💧', name:'Inkjet Coding Machine',        desc:'Continuous inkjet coder for batch, date and lot code printing on packaging lines.',                                  price:'₹700', unit:'/day'},
+  {cat:'print',icon:'🏷️', name:'Self-Adhesive Labelling Machine',desc:'Automatic labelling machine for bottles, jars and flat-pack products.',                                          price:'₹2,000',unit:'/day'},
+  {cat:'print',icon:'📐', name:'Creasing & Perforating Machine',desc:'Combined creaser-perforator for preparing board sheets before folding.',                                            price:'₹1,400',unit:'/day'},
 ];
-const catLabel = {metal:'Metal Fabrication',press:'Pressing & Forming',wood:'Woodworking'};
+
+const catLabel = {
+  metal:   'Fabrication & Metalworking',
+  textile: 'Textile Processing',
+  food:    'Food & Agro Processing',
+  print:   'Printing & Packaging',
+};
 
 function renderMachines(filter){
   const list = filter==='all'?machines:machines.filter(m=>m.cat===filter);
@@ -647,19 +1142,28 @@ function renderMachines(filter){
     </div>`).join('');
 }
 function filterMachines(cat,btn){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#machines .tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   renderMachines(cat);
 }
+/* ============================================================
+   BUTTON: Book Now on machine cards
+   → scrolls to contact form AND pre-selects the machine
+   ============================================================ */
 function bookMachine(name){
   goTo('contact');
   setTimeout(()=>{
-    const sel=document.getElementById('bk-machine');
-    for(let o of sel.options){if(o.text===name){sel.value=o.value;break;}}
-  },700);
+    const sel = document.getElementById('bk-machine');
+    for(let o of sel.options){
+      if(o.text === name){ sel.value = o.value; break; }
+    }
+    sel.focus();
+  }, 750);
 }
 
-/* ---- FAQ ---- */
+/* ============================================================
+   FAQ accordion
+   ============================================================ */
 const faqs=[
   {q:'What areas do you deliver to?',a:'All of Pune district — Bhosari MIDC, Chakan, Hadapsar, Pimpri-Chinchwad, Ranjangaon. Free delivery within 30km of central Pune.'},
   {q:'How much advance payment is required?',a:'30% at booking confirmation. Remaining 70% after machine delivery and setup at your site.'},
@@ -674,11 +1178,15 @@ document.getElementById('faqList').innerHTML = faqs.map((f,i)=>`
     <div class="faq-a">${f.a}</div>
   </div>`).join('');
 function toggleFaq(i){
-  document.querySelectorAll('.faq-item').forEach((el,idx)=>{if(idx!==i)el.classList.remove('open');});
+  document.querySelectorAll('.faq-item').forEach((el,idx)=>{ if(idx!==i) el.classList.remove('open'); });
   document.getElementById('faq-'+i).classList.toggle('open');
 }
 
-/* ---- Booking → Supabase ---- */
+/* ============================================================
+   BUTTON: Submit Booking → saves to Supabase bookings table
+   Fields: machine_name, customer_name, whatsapp, address,
+           start_date, duration, notes, status
+   ============================================================ */
 async function submitBooking(){
   const machine  = document.getElementById('bk-machine').value;
   const name     = document.getElementById('bk-name').value.trim();
@@ -690,51 +1198,283 @@ async function submitBooking(){
 
   if(!machine){ showToast('Please select a machine.','error'); return; }
   if(!name)   { showToast('Please enter your name.','error'); return; }
-  if(!phone || phone.length < 10){ showToast('Please enter a valid 10-digit WhatsApp number.','error'); return; }
+  if(!phone || phone.replace(/\D/g,'').length < 10){ showToast('Please enter a valid 10-digit WhatsApp number.','error'); return; }
 
   const btn = document.getElementById('submitBtn');
   btn.textContent = 'Sending…';
   btn.disabled = true;
 
-  const { error } = await supabase.from('bookings').insert([{
-    machine_name : machine,
-    customer_name: name,
-    whatsapp     : phone,
-    address      : addr,
-    start_date   : start || null,
-    duration     : duration,
-    notes        : notes,
-    status       : 'new'
-  }]);
-
-  btn.textContent = 'Submit Booking Request';
-  btn.disabled = false;
-
-  if(error){
-    console.error(error);
+  try {
+    const { error } = await supabase.from('bookings').insert([{
+      machine_name : machine,
+      customer_name: name,
+      whatsapp     : phone.replace(/\D/g,''),
+      address      : addr || null,
+      start_date   : start || null,
+      duration     : duration,
+      notes        : notes || null,
+      status       : 'new'
+    }]);
+    if(error) throw error;
+    showSuccessModal('booking');
+    ['bk-machine','bk-name','bk-phone','bk-addr','bk-start','bk-notes'].forEach(id=>{ document.getElementById(id).value=''; });
+  } catch(e){
+    console.error('Booking error:', e);
     showToast('Something went wrong. Please WhatsApp us directly.','error');
-    return;
+  } finally {
+    btn.textContent = 'Submit Booking Request';
+    btn.disabled = false;
   }
-
-  document.getElementById('successModal').classList.add('show');
-  // clear form
-  ['bk-machine','bk-name','bk-phone','bk-addr','bk-start','bk-notes'].forEach(id=>{
-    document.getElementById(id).value='';
-  });
 }
 
-/* ---- Helpers ---- */
+/* ============================================================
+   Helpers
+   ============================================================ */
 function showToast(msg, type='success'){
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.className = 'toast show' + (type==='error'?' error':'');
   setTimeout(()=>t.classList.remove('show'), 3500);
 }
+
+// Two modal modes: booking vs design/manufacturer connect
+function showSuccessModal(mode){
+  const modal = document.getElementById('successModal');
+  const title = modal.querySelector('h3');
+  const body  = modal.querySelector('p');
+  if(mode === 'design'){
+    title.textContent = 'Request Received!';
+    body.innerHTML = 'We\'ll send the design file to your WhatsApp within 1 hour.<br>Thank you for choosing COSOCKET.';
+  } else if(mode === 'mfr'){
+    title.textContent = 'Connected!';
+    body.innerHTML = 'We\'ll send you 2–3 manufacturer quotes on WhatsApp within 24 hours.<br>Thank you for choosing COSOCKET.';
+  } else {
+    title.textContent = 'Request Sent!';
+    body.innerHTML = 'We\'ll confirm on your WhatsApp within 2 hours.<br>Thank you for choosing COSOCKET.';
+  }
+  modal.classList.add('show');
+}
 function closeModal(){ document.getElementById('successModal').classList.remove('show'); }
 function openWhatsApp(){ window.open('https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20rent%20a%20machine%20from%20COSOCKET','_blank'); }
-function goTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+function goTo(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 76;
+  window.scrollTo({top, behavior:'smooth'});
+}
 
-renderMachines('all');
+/* ============================================================
+   DESIGNS — data + render + filter tabs
+   ============================================================ */
+const designs = [
+  {cat:'sheet',    icon:'📐', format:'DXF', name:'L-Bracket Set (Heavy Duty)',    desc:'Structural L-brackets in 3mm & 5mm MS. 6 sizes. Ready for laser cut or punching.',           tags:['MS Steel','3–5mm','Laser Cut'],       complexity:3, downloads:214},
+  {cat:'sheet',    icon:'🔩', format:'DXF', name:'Enclosure Box Panel',           desc:'Electrical panel enclosure with mounting holes, ventilation slots, cable knockouts.',        tags:['Stainless','2mm','Bending'],          complexity:2, downloads:187},
+  {cat:'fabrication',icon:'🏗️',format:'STP',name:'Welded Frame Assembly',         desc:'Square tube frame for conveyor/storage rack. Fully annotated with weld symbols.',          tags:['MS Tube','40×40','MIG Weld'],         complexity:4, downloads:96},
+  {cat:'wood',     icon:'🪵', format:'PDF', name:'Storage Shelf Unit',            desc:'Modular plywood shelf system. CNC router-ready. 3 height variants included.',               tags:['Plywood 18mm','Router','Dado Joint'], complexity:2, downloads:153},
+  {cat:'press',    icon:'💪', format:'DXF', name:'Blanking Die Layout',           desc:'Progressive blanking die for 50T power press. Includes strip layout and clearance notes.',  tags:['CR Steel','Progressive','50T Press'], complexity:5, downloads:72},
+  {cat:'sheet',    icon:'🔧', format:'DXF', name:'Cable Tray Section',            desc:'Perforated cable tray in 1.5mm GI sheet. Standard 100mm & 150mm widths.',                  tags:['GI Sheet','1.5mm','Perforation'],     complexity:2, downloads:301},
+  {cat:'fabrication',icon:'⚙️',format:'STP',name:'Rotary Jig Fixture',            desc:'Machining fixture for CNC lathe. Indexed 4-position. Step file with tolerances.',          tags:['Mild Steel','CNC Lathe','Tolerance H7'],complexity:5,downloads:61},
+  {cat:'wood',     icon:'🪚', format:'PDF', name:'Pallet Box (Export Grade)',     desc:'ISPM-15 compliant wooden pallet box. 1200×800 base. 3 load variants.',                     tags:['Hard Wood','Nail Joint','Export'],    complexity:3, downloads:128},
+  {cat:'press',    icon:'📦', format:'DXF', name:'Deep Draw Shell (Round)',       desc:'Round deep draw shell for hydraulic press. Material: CR1 steel. Spring-back noted.',       tags:['CR1 Steel','Deep Draw','Hydraulic'],  complexity:4, downloads:89},
+];
+
+const formatColor = {DXF:'var(--yellow)', STP:'var(--rust-lt)', PDF:'#66bb44'};
+
+function complexityDots(level){
+  return [1,2,3,4,5].map(i=>`<div class="complexity-dot${i<=level?' filled':''}"></div>`).join('');
+}
+
+function renderDesigns(filter){
+  const list = filter==='all' ? designs : designs.filter(d=>d.cat===filter);
+  document.getElementById('designGrid').innerHTML = list.map(d=>`
+    <div class="dcard">
+      <div class="dcard-preview">
+        ${d.icon}
+        <div class="dcard-format" style="background:${formatColor[d.format]||'var(--yellow)'};color:var(--black)">${d.format}</div>
+        <div class="dcard-complexity">${complexityDots(d.complexity)}</div>
+      </div>
+      <div class="dcard-body">
+        <h4>${d.name}</h4>
+        <p>${d.desc}</p>
+        <div class="dcard-meta">
+          <div class="dcard-tags">${d.tags.map(t=>`<span class="dtag">${t}</span>`).join('')}</div>
+          <button class="dcard-action" onclick="requestDesign(${JSON.stringify(d.name)})">Get File</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function filterDesigns(cat, btn){
+  document.querySelectorAll('.design-tabs .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderDesigns(cat);
+}
+
+/* ============================================================
+   BUTTON: "Get File" on design cards
+   → opens a small inline prompt modal, collects name + phone,
+     saves design_request row to Supabase bookings table,
+     then shows success
+   ============================================================ */
+let pendingDesignName = '';
+
+function requestDesign(name){
+  pendingDesignName = name;
+  document.getElementById('df-title').textContent = name;
+  document.getElementById('df-name').value  = '';
+  document.getElementById('df-phone').value = '';
+  document.getElementById('designFileModal').classList.add('show');
+}
+
+async function submitDesignRequest(){
+  const name  = document.getElementById('df-name').value.trim();
+  const phone = document.getElementById('df-phone').value.trim();
+
+  if(!name)  { showToast('Please enter your name.','error'); return; }
+  if(!phone || phone.replace(/\D/g,'').length < 10){ showToast('Please enter a valid WhatsApp number.','error'); return; }
+
+  const btn = document.getElementById('dfSubmitBtn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const { error } = await supabase.from('bookings').insert([{
+      machine_name : 'DESIGN-FILE-REQUEST',
+      customer_name: name,
+      whatsapp     : phone.replace(/\D/g,''),
+      notes        : `Design requested: ${pendingDesignName}`,
+      status       : 'new'
+    }]);
+    if(error) throw error;
+    closeDesignModal();
+    showSuccessModal('design');
+  } catch(e){
+    console.error('Design request error:', e);
+    showToast('Something went wrong. Please WhatsApp us directly.','error');
+  } finally {
+    btn.textContent = 'Send Me This File →';
+    btn.disabled = false;
+  }
+}
+
+function closeDesignModal(){
+  document.getElementById('designFileModal').classList.remove('show');
+}
+
+/* ============================================================
+   MANUFACTURERS — data + render
+   ============================================================ */
+const manufacturers = [
+  {
+    name:'Bhosari Precision Works', loc:'Bhosari MIDC, Pune', badge:'verified',
+    specs:['CNC Machining','Sheet Metal','Welding'],
+    desc:'15-year-old unit specialising in precision CNC parts and MS sheet fabrication. ISO 9001 certified. Min batch: 10 pcs.',
+    jobs:340, rating:'4.9', turnaround:'5–7 days'
+  },
+  {
+    name:'Chakan Metal Forms', loc:'Chakan Industrial Zone, Pune', badge:'featured',
+    specs:['Press Work','Deep Draw','Stamping'],
+    desc:'High-volume press shop with 8 hydraulic presses (25T–200T). Deep draw, blanking, progressive die. Export quality.',
+    jobs:210, rating:'4.8', turnaround:'7–10 days'
+  },
+  {
+    name:'Hadapsar Fab House', loc:'Hadapsar, Pune', badge:'verified',
+    specs:['Structural Fab','MIG Welding','Powder Coat'],
+    desc:'Structural fabrication and welding for frames, racks, enclosures. In-house powder coating. Handles one-offs to 500 pcs.',
+    jobs:178, rating:'4.7', turnaround:'4–6 days'
+  },
+  {
+    name:'Pimpri Wood Crafts', loc:'Pimpri-Chinchwad, Pune', badge:'verified',
+    specs:['CNC Router','Plywood Cutting','Export Pallets'],
+    desc:'Wood fabrication unit with 2 CNC routers. Furniture components, export pallet boxes, display shelving. ISPM-15 certified.',
+    jobs:125, rating:'4.8', turnaround:'3–5 days'
+  },
+];
+
+function renderManufacturers(){
+  document.getElementById('mfrGrid').innerHTML = manufacturers.map(m=>`
+    <div class="mfr-card">
+      <div class="mfr-header">
+        <div>
+          <div class="mfr-name">${m.name}</div>
+          <div class="mfr-loc">📍 ${m.loc}</div>
+        </div>
+        <div class="mfr-badge ${m.badge}">${m.badge==='verified'?'✓ Verified':'★ Featured'}</div>
+      </div>
+      <div class="mfr-specialties">${m.specs.map(s=>`<span class="mfr-spec-tag">${s}</span>`).join('')}</div>
+      <p class="mfr-desc">${m.desc}</p>
+      <div class="mfr-footer">
+        <div class="mfr-stat"><div class="mfr-stat-val">${m.jobs}+</div><div class="mfr-stat-lbl">Jobs Done</div></div>
+        <div class="mfr-stat"><div class="mfr-stat-val">${m.rating}</div><div class="mfr-stat-lbl">Rating</div></div>
+        <div class="mfr-stat"><div class="mfr-stat-val">${m.turnaround}</div><div class="mfr-stat-lbl">Turnaround</div></div>
+        <button class="mfr-connect-btn" onclick="connectToMfr(${JSON.stringify(m.name)})">Connect →</button>
+      </div>
+    </div>`).join('');
+}
+
+/* ============================================================
+   BUTTON: "Connect →" on manufacturer cards
+   → pre-fills the side panel form with the manufacturer name
+     and smooth-scrolls to the form field
+   ============================================================ */
+function connectToMfr(name){
+  const el = document.getElementById('mfr-req');
+  if(el){
+    if(!el.value) el.value = `I'd like to connect with ${name} for manufacturing.`;
+    // highlight which manufacturer was chosen
+    document.getElementById('mfr-selected').textContent = `→ Connecting to: ${name}`;
+    document.getElementById('mfr-selected').style.display = 'block';
+    setTimeout(()=>{ el.scrollIntoView({behavior:'smooth', block:'center'}); el.focus(); }, 100);
+  }
+}
+
+/* ============================================================
+   BUTTON: "Get Manufacturer Quotes →" — connect panel form
+   → validates, saves to Supabase, shows success modal
+   ============================================================ */
+async function submitMfrConnect(){
+  const name  = document.getElementById('mfr-name').value.trim();
+  const phone = document.getElementById('mfr-phone').value.trim();
+  const req   = document.getElementById('mfr-req').value.trim();
+  const file  = document.getElementById('mfr-file').value.trim();
+  const selected = document.getElementById('mfr-selected').textContent.replace('→ Connecting to: ','').trim();
+
+  if(!name)  { showToast('Please enter your name.','error'); return; }
+  if(!phone || phone.replace(/\D/g,'').length < 10){ showToast('Please enter a valid WhatsApp number.','error'); return; }
+  if(!req)   { showToast('Please describe what you need made.','error'); return; }
+
+  const btn = document.querySelector('.conn-submit');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const { error } = await supabase.from('bookings').insert([{
+      machine_name : 'MANUFACTURER-CONNECT',
+      customer_name: name,
+      whatsapp     : phone.replace(/\D/g,''),
+      address      : selected ? `Preferred: ${selected}` : null,
+      notes        : `REQUIREMENT: ${req}${file ? ' | Design/File: '+file : ''}`,
+      status       : 'new'
+    }]);
+    if(error) throw error;
+    showSuccessModal('mfr');
+    ['mfr-name','mfr-phone','mfr-req','mfr-file'].forEach(id=>{ document.getElementById(id).value=''; });
+    document.getElementById('mfr-selected').style.display = 'none';
+    document.getElementById('mfr-selected').textContent = '';
+  } catch(e){
+    console.error('Mfr connect error:', e);
+    showToast('Something went wrong. Please WhatsApp us directly.','error');
+  } finally {
+    btn.textContent = 'Get Manufacturer Quotes →';
+    btn.disabled = false;
+  }
+}
+
+/* ============================================================
+   Init
+   ============================================================ */
+renderDesigns('all');
+renderManufacturers();
 </script>
 </body>
 </html>
